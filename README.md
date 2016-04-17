@@ -73,22 +73,10 @@ It has few embellishments, but it does have undo (u), restart (r), and setpoint 
 
 "ocmp.sh" is the build script for OSX, and "lcmp.sh" is for GNU/Linux.  ccc.sh is the build script for trbfs.  Just type "ccc.sh trbfs" to compile the autosolver on either platform.
 
-If the delivered linux binary does not run, and recompilation fails to create a usable executable, try these...
+If the delivered linux binary does not run, recompile with scmp.sh.
 
--------------------------------------------------------
-### Steps to compile and run on "other" linux distros.
+The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
 
-* Install Cmake...complicated from source, easy using a system update.
-
-* Install SDL2-dev.
-	* First, try a system update of libSDL2-devel.
-	* Downloading and building from source is the hardest way, but still easy.  Requires Cmake.
-
-* Install SFML-dev.
-	* First, try a system update of sfml-dev or libsfml-devel.  
-	* Building from source using Cmake is difficult because there are several prerequisites, but if you add them one at a time based on the cmake error messages, it is achievable.
-
-At this point, the delivered compile script is likely to work without mods.
 
 ------------------------------------------------
 
