@@ -71,7 +71,7 @@ It has few embellishments, but it does have undo (u), restart (r), and setpoint 
 * a recent gcc compiler that supports -std=c++11;
 * graphics card that supports OpenGL version 3.3 or later;
 
-"ocmp.sh" is the build script for OSX, and "lcmp.sh" is for GNU/Linux.  ccc.sh is the build script for trbfs.  Just type "ccc.sh trbfs" to compile the autosolver on either platform.
+"ocmp.sh" is the build script for OSX, and "scmp.sh" is for GNU/Linux.  ccc.sh is the build script for trbfs.  Just type "ccc.sh trbfs" to compile the autosolver on either platform.
 
 If the delivered linux binary does not run, recompile with scmp.sh.
 
