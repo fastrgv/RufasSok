@@ -4,10 +4,20 @@ RufasSok is a minimalistic version of the Sokoban puzzle game for both Mac OS-X 
 Get full source and binaries in the tar.gz file under releases.
 
 
-# RufaSok - v2.0.1
+# RufaSok - v2.1.1
 
 ## What's new:
 
+**v 2.1.1 - 11may16**
+
+* using extlibs-frameworks from a pre-release SFML-v2.3.2 repository on github now elliminates a deprecation warning on OS-X.
+* Added static sound libraries built from latest OpenAL sources on github.
+* Developed compilation scripts that now provide several good alternative versions.
+* Preferred compilation scripts use static sound libs.
+
+**v 2.1 - 28apr16(not delivered)**
+
+* Upgraded to using SFML v2.3.2 libraries.
 
 **v 2.0.1 - 17apr16**
 
@@ -71,9 +81,9 @@ It has few embellishments, but it does have undo (u), restart (r), and setpoint 
 * a recent gcc compiler that supports -std=c++11;
 * graphics card that supports OpenGL version 3.3 or later;
 
-"ocmp.sh" is the build script for OSX, and "scmp.sh" is for GNU/Linux.  ccc.sh is the build script for trbfs.  Just type "ccc.sh trbfs" to compile the autosolver on either platform.
+"ocmps.sh" is the build script for OSX, and "lcmps.sh" is for GNU/Linux.  ccc.sh is the build script for trbfs.  Just type "ccc.sh trbfs" to compile the autosolver on either platform.
 
-If the delivered linux binary does not run, recompile with scmp.sh.
+If the delivered linux binary does not run, recompile with lcmps.sh or lcmp.sh.
 
 The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
 
