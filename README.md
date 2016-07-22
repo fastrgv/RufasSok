@@ -1,3 +1,5 @@
+![screenshot](https://github.com/fastrgv/RufasSok/blob/master/rsok.png)
+
 # RufasSok
 RufasSok is a minimalistic version of the Sokoban puzzle game for both Mac OS-X and GNU-Linux.
 
