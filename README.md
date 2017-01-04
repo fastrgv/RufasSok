@@ -4,12 +4,19 @@
 RufasSok is a minimalistic version of the Sokoban puzzle game for both Mac OS-X and GNU-Linux.
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
-https://github.com/fastrgv/RufasSok/releases/download/v2.2.0/asok_20aug2016.tar.gz
+
+https://github.com/fastrgv/RufasSok/releases/download/v2.2.1/rsok5jan17.tar.gz
 
 
-# RufaSok - v2.2.0
+# RufaSok - v2.2.1
 
 ## What's new:
+
+**v 2.2.1 - 5jan17**
+
+* Now used improved SFML interface binding.
+* Added WASD keys for movement as alternates for the arrow keys.
+
 
 **v 2.2.0 - 20aug16**
 
