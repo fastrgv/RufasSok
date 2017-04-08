@@ -5,34 +5,24 @@ RufasSok is a minimalistic version of the Sokoban puzzle game for both Mac OS-X 
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.2.1/rsok5jan17.tar.gz
 
 
-# RufaSok - v2.2.1
+
+# RufaSok - v2.2.2
 
 ## What's new:
 
-**v 2.2.1 - 5jan17**
 
-* Now used improved SFML interface binding.
-* Added WASD keys for movement as alternates for the arrow keys.
+**v2.2.2 - 9apr17**
+
+* Improved error checking in shader package;
+* Removed OpenGL-deprecated functions that could cause aborts;
+* Revised directory structure, simplified codes;
+* Added screen output of push-count, move-count.
+
+## See revision history at end of file
 
 
-**v 2.2.0 - 20aug16**
-
-* Converted to Ada with essentially the same functionality.  Of course the build scripts are different.
-* Now includes two sokoban solvers, also written in Ada:  puller, ibox.
-
-
-**v 2.0 - 22feb16**
-
-* added a Mac binary bundle that acts much more like a typical Mac App.  This app is delivered in the installation directory, but could be moved elsewhere, such as your personal Applications directory.  Note that there are some soft [symbolic] links in the bundle that are resolved automatically when copied by the command "cp -r rufasok.app destination-directory".
-
-**v 1.6 - 26jun15**
-
-* added (z) to menu, a keystroke that creates a setpoint (reZero) such that subsequent restarts (r) actually restore this configuration instead of the initial configuration.  Use this when you have made progress but then want to embark on various alternate speculative strategies.
-
-* Within a game session, the current level attempted in each file is now preserved as one moves between files.
 
 -----------------------------------------------------------------
 
@@ -42,7 +32,7 @@ This is a minimalistic version of the Sokoban puzzle game.  It uses data in a fo
 
 The beauty of this implementation is that it is fully OpenGL 3.3 core profile, and uses no OpenGL-deprecated functions.
 
-It has few embellishments, but it does have undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (b) and smaller (s) keys help you adjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys.  The objective is to push all the movable objects onto their targets.
+It has few embellishments, but it does have undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (>) and smaller (<) keys on the numeric keypad help you adjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys.  The objective is to push all the movable objects onto their targets.
 
 --------------------------------------------
 ## Features
@@ -65,12 +55,28 @@ Focusing on portability and freedom, no coding effort or compromise has been mad
 ## Build Requirements:
 * a recent GNAT Ada compiler from AdaLibre;
 * graphics card that supports OpenGL version 3.3 or later;
+* Xcode g++ compiler, if using OS-X
 
-"ocmp.sh" is the build script for OSX, and "lcmp.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers puller and ibox.  Just type "ccc.sh puller" or "ccc.sh ibox" to compile on either platform.
 
-If the delivered linux binary does not run, recompile with lcmp.sh.
+"ocmpss.sh" is the build script for OSX, and "lcmpd.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "puller" and "ibox".  Just type "ccc.sh puller" or "ccc.sh ibox" to compile on either platform.
 
 The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
+
+If the delivered linux binary does not run, try:
+
+* Manually install GNAT GPL from libre.adacore.com/download/.
+* Rerun the compile script lcmpd.sh or lcmpd2.sh.
+
+### Fixable Link Problems during linux build:
+
+On a linux build machine, you might have fixable link errors, depending on its configuration.  If you are missing "libz", you can simply copy "libz.so" from /usr/gnat/lib/gps/ into /usr/local/lib/.  If "libGL" cannot be found, this literally means "libGL.so" was absent.  But you might have "libGL.so.1" present.  In this case, simply create a softlink by changing to the libGL directory, then type the line:
+
+sudo ln -s libGL.so.1 libGL.so  (and enter the admin password)
+
+whence the linker should now be able to find what it wants.  But if there is more than one file libGL.so present on your system, make sure you use the best one;  i.e. the one that represents your accelerated-graphic-driver.
+
+
+
 
 ------------------------------------------------
 
@@ -85,7 +91,7 @@ Mac users must navigate to the installation directory in Finder and click the "r
 
 The install_directory should contain subdirectories named "data", "gnulibs", "include", "games", "skins".
 
-
+Pusher movement is accomplished using the arrow keys or the WASD keys.
 
 asok has the following skin options:
 * gray bkgd
@@ -93,7 +99,7 @@ asok has the following skin options:
 * water bkgd
 * antique desk skin
 * plain and simple
-...the (t)-key now cycles thru the skins.
+...the (c)-key now cycles thru the skins (c=color)
 
 -----------------------------------------------------------------
 
@@ -106,8 +112,8 @@ Note that the (h) key brings up a help menu that looks like this:
 * (p)   = previous-puzzle in current file
 * (R-shift) = next-file
 * (L-shift) = previous-file
-* (b)   = bigger
-* (s)   = smaller
+* KP(>)   = bigger
+* KP(<)   = smaller
 * (z)   = reZero (setPoint)...subsequent presses of (r)-key will restore this configuration
 * (c)   = next skin Color
 
@@ -146,4 +152,28 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
  at <http://www.gnu.org/licenses/>.
 
 -------------------------------------------------
+
+## Revision History:
+
+
+**v 2.2.1 - 5jan17**
+
+* Now used improved SFML interface binding.
+* Added WASD keys for movement as alternates for the arrow keys.
+
+
+**v 2.2.0 - 20aug16**
+
+* Converted to Ada with essentially the same functionality.  Of course the build scripts are different.
+* Now includes two sokoban solvers, also written in Ada:  puller, ibox.
+
+
+**v 2.0 - 22feb16**
+
+* added a Mac binary bundle that acts much more like a typical Mac App.  This app is delivered in the installation directory, but could be moved elsewhere, such as your personal Applications directory.  Note that there are some soft [symbolic] links in the bundle that are resolved automatically when copied by the command "cp -r rufasok.app destination-directory".
+
+**v 1.6 - 26jun15**
+
+* added (z) to menu, a keystroke that creates a setpoint (reZero) such that subsequent restarts (r) actually restore this configuration instead of the initial configuration.  Use this when you have made progress but then want to embark on various alternate speculative strategies.
+* Within a game session, the current level attempted in each file is now preserved as one moves between files.
 
