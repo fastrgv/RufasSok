@@ -5,16 +5,17 @@ RufasSok is a minimalistic version of the Sokoban puzzle game for both Mac OS-X 
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.2.2/rsok9apr17.tar.gz
 
 
-# RufaSok - v2.2.2
+
+# RufaSok - v2.2.3
 
 ## What's new:
 
+**v2.2.3 - 18apr17**
+* Now saves the complete game state on exit so that your progress through the levels of each puzzle file will be preserved.
 
 **v2.2.2 - 9apr17**
-
 * Improved error checking in shader package;
 * Removed OpenGL-deprecated functions that could cause aborts;
 * Revised directory structure, simplified codes;
