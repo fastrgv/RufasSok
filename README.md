@@ -5,24 +5,24 @@ RufasSok is a minimalistic version of the Sokoban puzzle game for both Mac OS-X 
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.2.3/asok18apr17.tar.gz
 
-
-# RufaSok - v2.2.3
+# RufaSok - v2.2.4
 
 ## What's new:
 
+
+**v2.2.4 - 23apr17**
+
+* Puzzle files are now sorted alphabetically for intuitive navigation.
+* An autosolver is now embedded within this application so that pressing the "=" key at any time initiates an attempt to solve the present state of the current puzzle.  See extended description below.
+
+
 **v2.2.3 - 18apr17**
+
 * Now saves the complete game state on exit so that your progress through the levels of each puzzle file will be preserved.
 * Also includes precompiled solvers for each platform.
 
-**v2.2.2 - 9apr17**
-* Improved error checking in shader package;
-* Removed OpenGL-deprecated functions that could cause aborts;
-* Revised directory structure, simplified codes;
-* Added screen output of push-count, move-count.
-
-## See revision history at end of file
+## See complete revision history at end of file
 
 
 
@@ -30,11 +30,11 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.2.3/asok18apr17.tar.gz
 
 ## RufaSok Introduction
 
-This is a minimalistic version of the Sokoban puzzle game.  It uses data in a format that is found on the internet, perhaps requiring a bit of editting.
+This is a minimalistic version of the Sokoban puzzle game with 2 autosolvers.  It uses data in a format that is easily found on the internet.
 
-The beauty of this implementation is that it is fully OpenGL 3.3 core profile, and uses no OpenGL-deprecated functions.
+This implementation is fully OpenGL 3.3 core profile, and uses no OpenGL-deprecated functions.
 
-It has few embellishments, but it does have undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (>) and smaller (<) keys on the numeric keypad help you adjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys.  The objective is to push all the movable objects onto their targets.
+It has few embellishments, but it does have undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (+) and smaller (-) keys on the numeric keypad help you adjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys, or WASD keys.  The objective is to push all the movable objects onto their targets.
 
 --------------------------------------------
 ## Features
@@ -44,6 +44,20 @@ It has few embellishments, but it does have undo (u), restart (r), and setpoint 
 * uses SFML for applause sound;
 * all runtime files are in ./data/
 * all puzzle files are in ./games/
+* includes 2 external autosolvers:  puller, ibox
+* includes 1 internal autosolver too.
+
+----------------------------------------------
+## Embedded Autosolver Function
+An autosolver (ibox) is now embedded within this application so that pressing the equal-key ("=") at any time initiates an attempt to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the equal-key to single-step toward the solution.  Otherwise you will see no such prompt.
+
+Thus, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the equal-key and proceed manually.  This really helps when you cannot see what your next move should be.
+
+Embedded autosolver failure might imply the present state of the puzzle is impossible to solve, or simply that the autosolver failed due to time constraint, or insufficient capability.
+
+## External Autosolvers
+Remember that there are still two external autosolvers without time constraints.  Subject to several limitations, typing: "solver-name puzzle-file-name.sok maxlevels level-number" will attempt to solve a particular puzzle for you, where solver-name is either "puller" or "ibox".  There are many large or sparse [lishout] puzzles these solvers cannot handle, but they are pretty good at sovling the small dense ones.  Use the script ccc.sh to compile either solver for your operating system (assuming the presence of an Ada compiler).
+
 
 ----------------------------------------------
 
@@ -59,12 +73,13 @@ Focusing on portability and freedom, no coding effort or compromise has been mad
 * graphics card that supports OpenGL version 3.3 or later;
 * Xcode g++ compiler, if using OS-X
 
+## Build instructions:
 
-"ocmpss.sh" is the build script for OSX, and "lcmpd.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "puller" and "ibox".  Just type "ccc.sh puller" or "ccc.sh ibox" to compile on either platform.
+"ocmpss.sh" is the build script for OSX, and "lcmpd.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "puller" and "ibox".  Just type "ccc.sh puller" or "ccc.sh ibox" to compile on any platform, assuming the presence of an Ada compiler.
 
 The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
 
-If the delivered linux binary does not run, try:
+If the delivered GNU/Linux binary does not run, try:
 
 * Manually install GNAT GPL from libre.adacore.com/download/.
 * Rerun the compile script lcmpd.sh or lcmpd2.sh.
@@ -118,22 +133,19 @@ Note that the (h) key brings up a help menu that looks like this:
 * KP(<)   = smaller
 * (z)   = reZero (setPoint)...subsequent presses of (r)-key will restore this configuration
 * (c)   = next skin Color
-
-Finally, subject to several limitations, typing: "solver-name puzzle-file-name.sok maxlevels level-number" will attempt to solve a particular puzzle for you, where solver-name is either "puller" or "ibox".  There are many cases these solvers cannot handle, but they are pretty good at sovling certain types of puzzles, particularly the more dense ones.
-
+* (=)   = try autosolver
 -----------------------------------------------------------------
 
 ## Adding Your Own Sokoban Files
 
 Note that the file naming conventions must be maintained now that dynamic file loading is done after reading the ./games/ directory.  No underscores are permitted except one that precedes the integer that indicates the number of levels in the file.  The name format is thus anyname_nnn.sok.  Note that there is a standardized format for the online sokoban files themselves that I have attempted to respect and maintain.
 
+===================================================================
 
+I anticipate some problems with the newly attached autosolver so please report them and any questions or comments to fastrgv@gmail.com
 
-Please send questions or comments to
-
-	fastrgv@gmail.com
-
-
+===================================================================
+## legal mumbo jumbo:
 
 RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
@@ -156,6 +168,14 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 -------------------------------------------------
 
 ## Revision History:
+
+
+**v2.2.2 - 9apr17**
+
+* Improved error checking in shader package;
+* Removed OpenGL-deprecated functions that could cause aborts;
+* Revised directory structure, simplified codes;
+* Added screen output of push-count, move-count.
 
 
 **v 2.2.1 - 5jan17**
