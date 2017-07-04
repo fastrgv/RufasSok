@@ -5,12 +5,25 @@ RufasSok is a minimalistic version of the Sokoban puzzle game for both Mac OS-X 
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.2.4/rsok4may17.tar.gz
 
 
-# RufaSok - v2.2.4
+
+# RufaSok - v2.2.5
 
 ## What's new:
+
+**ver 2.2.5 -- 4jul17**
+* Updated linux scripts to use a) SFML v2.4.2;  b) AdaCore 2017;
+* Added linux script lcmp16.sh for AdaCore 2016 and earlier;
+* Note that AdaCore 2017 works on OS-X with no changes;
+* Added startup messages listing OGL profile & version;
+* Improved keyboard response;
+
+
+**v2.2.4 - 02may17**
+
+* Added step countdown during solve.
+* Made corrections to autosolvers.
 
 
 **v2.2.4 - 23apr17**
