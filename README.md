@@ -9,34 +9,19 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.2.5/asok4jul17.tar.gz
 
 
 
-# RufaSok - v2.2.5
+# RufaSok
+-------------------------------------------------------------
 
 ## What's new:
 
-**ver 2.2.5 -- 4jul17**
-* Updated linux scripts to use a) SFML v2.4.2;  b) AdaCore 2017;
-* Added linux script lcmp16.sh for AdaCore 2016 and earlier;
-* Note that AdaCore 2017 works on OS-X with no changes;
-* Added startup messages listing OGL profile & version;
-* Improved keyboard response;
+**ver 2.2.6 -- 5nov17**
 
+* Win32 executable now included (built on Windows-10);
+* Now supports MSwin32 builds by adding DLLs and libs;
+* Improved compilation scripts;
+* Added sdl "pumpevents" where needed;
+* Corrected logic inside equal-key handler;
 
-**v2.2.4 - 02may17**
-
-* Added step countdown during solve.
-* Made corrections to autosolvers.
-
-
-**v2.2.4 - 23apr17**
-
-* Puzzle files are now sorted alphabetically for intuitive navigation.
-* An autosolver is now embedded within this application so that pressing the "=" key at any time initiates an attempt to solve the present state of the current puzzle.  See extended description below.
-
-
-**v2.2.3 - 18apr17**
-
-* Now saves the complete game state on exit so that your progress through the levels of each puzzle file will be preserved.
-* Also includes precompiled solvers for each platform.
 
 ## See complete revision history at end of file
 
@@ -46,17 +31,18 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.2.5/asok4jul17.tar.gz
 
 ## RufaSok Introduction
 
-This is a minimalistic version of the Sokoban puzzle game with 2 autosolvers.  It uses data in a format that is easily found on the internet.
+This is a minimalistic version of the Sokoban puzzle game with 2 external solvers, and one embedded auto-solver.
 
 This implementation is fully OpenGL 3.3 core profile, and uses no OpenGL-deprecated functions.
 
-It has few embellishments, but it does have undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (+) and smaller (-) keys on the numeric keypad help you adjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys, or WASD keys.  The objective is to push all the movable objects onto their targets.
+It has undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (+) and smaller (-) keys on the numeric keypad help you adjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys, or WASD keys.  The objective is to push all the movable objects onto their targets.  And now the (=)-key triggers an embedded solver that helps you when you get stuck.
 
 --------------------------------------------
 ## Features
 
+* runs on Windows, OSX, Linux;
 * uses SDL2;
-* works on OS-X Retina displays;
+* works on Retina displays;
 * uses SFML for applause sound;
 * all runtime files are in ./data/
 * all puzzle files are in ./games/
@@ -78,9 +64,9 @@ Remember that there are still two external autosolvers without time constraints.
 ----------------------------------------------
 
 ## what is special about this project?
-Uses the Ada programming language and fully modern OpenGL methods.  Achieves version 3.3 core profile contexts, and compiles and runs on both GNU/Linux and Mac OS-X systems.
+Uses the Ada programming language and fully modern OpenGL methods, with textures, shaders and uniforms.  Achieves version 3.3 core profile contexts.  Compiles and runs on MSwin32, GNU/Linux and Mac OS-X systems.
 
-Focusing on portability and freedom, no coding effort or compromise has been made to accomodate proprietary operating systems.  It relies on a thin SDL2 binding from Dan Vazquez, a thin OpenGL binding from "Lumen", a PNG reader by Stephen Sanguine, and SFML-Audio (because of its elegant audio interface).
+Focusing on portability and open source freedom, this project relies on a thin SDL2 binding from Dan Vazquez, a thin OpenGL binding from "Lumen", a PNG reader by Stephen Sanguine, and SFML-Audio (because of its elegant audio interface).
 
 
 
@@ -91,7 +77,9 @@ Focusing on portability and freedom, no coding effort or compromise has been mad
 
 ## Build instructions:
 
-"ocmpss.sh" is the build script for OSX, and "lcmpd.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "puller" and "ibox".  Just type "ccc.sh puller" or "ccc.sh ibox" to compile on any platform, assuming the presence of an Ada compiler.
+"wcmp.bat" is the build script for MSwin32, "ocmpss.sh" for OSX, and "lcmpd.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "puller" and "ibox".  Just type "ccc.sh puller" or "ccc.sh ibox" to compile on any platform, assuming the presence of an Ada compiler.
+
+The Win32 binary was build on Windows-10.  I don't know how portable it is.
 
 The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
 
@@ -156,9 +144,7 @@ Note that the (h) key brings up a help menu that looks like this:
 
 Note that the file naming conventions must be maintained now that dynamic file loading is done after reading the ./games/ directory.  No underscores are permitted except one that precedes the integer that indicates the number of levels in the file.  The name format is thus anyname_nnn.sok.  Note that there is a standardized format for the online sokoban files themselves that I have attempted to respect and maintain.
 
-===================================================================
 
-I anticipate some problems with the newly attached autosolver so please report them and any questions or comments to fastrgv@gmail.com
 
 ===================================================================
 ## legal mumbo jumbo:
@@ -166,7 +152,7 @@ I anticipate some problems with the newly attached autosolver so please report t
 RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
 
- Copyright (C) 2015  <fastrgv@gmail.com>
+ Copyright (C) 2017  <fastrgv@gmail.com>
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -184,6 +170,32 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 -------------------------------------------------
 
 ## Revision History:
+
+**ver 2.2.5 -- 4jul17**
+
+* Updated linux scripts to use a) SFML v2.4.2;  b) AdaCore 2017;
+* Added linux script lcmp16.sh for AdaCore 2016 and earlier;
+* Note that AdaCore 2017 works on OS-X with no changes;
+* Added startup messages listing OGL profile & version;
+* Improved keyboard response;
+
+
+**v2.2.4 - 02may17**
+
+* Added step countdown during solve.
+* Made corrections to autosolvers.
+
+
+**v2.2.4 - 23apr17**
+
+* Puzzle files are now sorted alphabetically for intuitive navigation.
+* An autosolver is now embedded within this application so that pressing the "=" key at any time initiates an attempt to solve the present state of the current puzzle.  See extended description below.
+
+
+**v2.2.3 - 18apr17**
+
+* Now saves the complete game state on exit so that your progress through the levels of each puzzle file will be preserved.
+* Also includes precompiled solvers for each platform.
 
 
 **v2.2.2 - 9apr17**
@@ -214,4 +226,5 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
 * added (z) to menu, a keystroke that creates a setpoint (reZero) such that subsequent restarts (r) actually restore this configuration instead of the initial configuration.  Use this when you have made progress but then want to embark on various alternate speculative strategies.
 * Within a game session, the current level attempted in each file is now preserved as one moves between files.
+
 
