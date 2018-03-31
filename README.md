@@ -13,6 +13,16 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.2.6/rsok9nov17.tar.gz
 
 ## What's new:
 
+**ver 2.2.7 -- 1apr18**
+
+* Now using intrinsic/robust Exists() function;
+* Uninverted font file;
+* Improved function names in matutils;
+* Too many undos no longer aborts;
+* Added GPR build scripts;
+* Improved & simplified OSX build;
+
+
 **ver 2.2.6 -- 5nov17**
 
 * Win32 executable now included (built on Windows-10);
