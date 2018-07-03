@@ -5,7 +5,7 @@ RufasSok is a minimalistic version of the Sokoban puzzle game for Windows, Mac O
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.2.7/as1apr18.tar.gz
+https://github.com/fastrgv/RufasSok/releases/download/v2.2.8/as4jul18.tar.gz
 
 
 
