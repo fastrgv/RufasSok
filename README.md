@@ -14,6 +14,10 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.2.8/as4jul18.tar.gz
 
 ## What's new:
 
+**ver 2.2.9 -- 08jul18**
+
+* Updated to using SDL v2.0.7;
+* Corrected code to handle DOS-formatted resume & puzzle files.
 
 **ver 2.2.8 -- 04jul18**
 
@@ -99,7 +103,7 @@ Users may then open a terminal window, cd to install_directory, then, at the com
 
 Mac users must navigate to the installation directory in Finder and click the "rufasok.app" icon named "Rufasok".
 
-Windows users type:  binw32\rufasok32.exe.  
+Windows users type:  binw32\rufasok.exe.  
  
 
 The install_directory should contain subdirectories named "data", "gnulibs", "include", "games", "skins".
