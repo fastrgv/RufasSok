@@ -14,6 +14,12 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.2.9/as8jul18.tar.gz
 
 ## What's new:
 
+**ver 2.3.0 -- 25nov18**
+
+* Now using sdl v207 uniformly (all platforms);
+* Now using sfml v250 uniformly (all platforms);
+* Updated all sokoban solvers to favor robustness & good solutions;
+
 **ver 2.2.9 -- 08jul18**
 
 * Updated to using SDL v2.0.7;
