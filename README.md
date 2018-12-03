@@ -14,6 +14,11 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.0/as25nov18.tar.gz
 
 ## What's new:
 
+**ver 2.3.1 -- 3dec18**
+
+* Updated to SDL2 v2.0.8 (all 3 platforms);
+
+
 **ver 2.3.0 -- 25nov18**
 
 * Now using sdl v207 uniformly (all platforms);
