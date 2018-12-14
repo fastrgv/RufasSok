@@ -7,6 +7,10 @@ Get full source and binaries in the tar.gz file under releases, or try this link
 
 https://github.com/fastrgv/RufasSok/releases/download/v2.3.1/as3dec18.tar.gz
 
+or for Windows users try:
+https://github.com/fastrgv/RufasSok/releases/download/v2.3.1/as3dec18tar.zip
+
+
 
 
 # RufaSok
