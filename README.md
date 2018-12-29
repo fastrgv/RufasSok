@@ -5,10 +5,9 @@ RufasSok is a minimalistic version of the Sokoban puzzle game for Windows, Mac O
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.3.1/as3dec18.tar.gz
 
-or for Windows users try:
-https://github.com/fastrgv/RufasSok/releases/download/v2.3.1/as3dec18tar.zip
+
+
 
 
 
@@ -18,40 +17,18 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.1/as3dec18tar.zip
 
 ## What's new:
 
+
 **ver 2.3.1 -- 3dec18**
 
 * Updated to SDL2 v2.0.8 (all 3 platforms);
 
-
-**ver 2.3.0 -- 25nov18**
-
-* Now using sdl v207 uniformly (all platforms);
-* Now using sfml v250 uniformly (all platforms);
-* Updated all sokoban solvers to favor robustness & good solutions;
-
-**ver 2.2.9 -- 08jul18**
-
-* Updated to using SDL v2.0.7;
-* Corrected code to handle DOS-formatted resume & puzzle files.
-
-**ver 2.2.8 -- 04jul18**
-
-* Added & improved 2nd built-in solver initiated with numeric-keypad "=" key.  This might solve problems that stump the 1st solver [using the normal keyboard "=" key].  [Not accessible on laptops?]
-* Added a "Solution not found" message when a built-in solver fails within 10 seconds.
-* Updated AdaPngLib, AdaZLib;
-* Put Windows DLLs, EXEs into ./binw32/
-
-
-
-## See complete revision history at end of file
-
-
+See complete revision history at end of file
 
 -----------------------------------------------------------------
 
 ## RufaSok Introduction
 
-This is a minimalistic version of the Sokoban puzzle game with 2 external solvers, and one embedded auto-solver.
+This is a minimalistic version of the Sokoban puzzle game with 2 external solvers, and two embedded auto-solvers.
 
 This implementation is fully OpenGL 3.3 with no "deprecated" functions.
 
@@ -66,16 +43,16 @@ It has undo (u), restart (r), and setpoint (z) functions.  Each data file has se
 * uses SFML for applause sound;
 * all runtime files are in ./data/
 * all puzzle files are in ./games/
-* includes 2 external autosolvers:  puller, ibox
-* includes 1 internal autosolver too.
+* includes 2 external autosolvers:  ipuller3, ibox3
+* includes 2 internal autosolver too.
 
 ----------------------------------------------
 ## Embedded Autosolver Function
-Two autosolvers are now embedded within this application so that pressing the ("=")-key at any time initiates an attempt by the primary solver to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the equal-key to single-step toward the solution.  Otherwise you will see no such prompt.
+Two autosolvers are now embedded within this application so that pressing the ("=")-key at any time initiates an attempt by the primary solver to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the equal-key to single-step toward the solution.  Otherwise you will see no such prompt.  This primary solver is good for small and dense layouts.
 
 Similarly, the 2nd alternate solver is initiated with the numeric keypad ("=")-key.
 
-Thus, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the equal-key and proceed manually.  This really helps when you cannot see what your next move should be.
+Thusly, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the equal-key and proceed manually.  This really helps when you cannot see what your next move should be.
 
 Embedded autosolver failure might imply the present state of the puzzle is impossible to solve, or simply that the autosolver failed due to time constraint, or insufficient capability.
 
@@ -83,8 +60,8 @@ Embedded autosolver failure might imply the present state of the puzzle is impos
 Remember that there are still two external autosolvers without time constraints.  Subject to several limitations, typing: "solver-name puzzle-file-name.sok maxlevels level-number" will attempt to solve a particular puzzle for you, where solver-name is either "ipuller3" or "ibox3".  There are many large or sparse [lishout] puzzles these solvers cannot handle, but they are pretty good at sovling the small dense ones.  Use the script ccc.sh to compile either solver for your operating system (assuming the presence of an Ada compiler).
 
 The command to build them both [on OSX/linux] is simply:
-	ccc.sh ibox3
-	ccc.sh ipuller3
+	ccc[gnu|osx].sh ibox3
+	ccc[gnu|osx].sh ipuller3
 
 and on Windows:
 	ccc.bat ibox3
@@ -93,34 +70,34 @@ and on Windows:
 To run type:  [exeName puzzleFile TotalLevels LevelToSolve]
 
 EG on windows type:
-	binw32\ipuller3 games\pico_22.sok 22 3
+	binw32\puller games\pico_22.sok 22 3
 	...to solve the 3rd level in file pico_22.sok.
 
 EG on OSX type:
-	ipuller3_osx games/pico_22.sok 22 3
+	puller_osx games/pico_22.sok 22 3
 
 ----------------------------------------------
 
 ## what is special about this project?
 Uses the Ada programming language and fully modern OpenGL methods, with textures, shaders and uniforms.  Achieves version 3.3 core profile contexts.  Compiles and runs on MSwin32, GNU/Linux and Mac OS-X systems.
 
-Focusing on portability and open source freedom, this project relies on a thin SDL2 binding from Dan Vazquez, a thin OpenGL binding from "Lumen", a PNG reader by Stephen Sanguine, and SFML-Audio (because of its elegant audio interface).
+Focusing on portability and open source freedom, this project relies on a thin SDL2 binding, a thin OpenGL binding from "Lumen", a PNG reader by Stephen Sanguine, and SFML-Audio (because of its elegant audio interface).
 
 ------------------------------------------------
 
 ## Setup & Running:
 
+Mac users see "osx-setup.txt".
+Windows users see "windows-setup.txt".
 
-Unzip the archive.  On Windows, 7z [www.7-zip.org] works well for this;  but so does the intrinsic command "tar -xf [filename].tar.gz", which extracts everything into the current directory.
-
-Windows users may see some error messages (that may be ignored) pertaining to directory links.  Directory links are needed only on OSX & Linux.
+Unzip the archive.  On Windows, 7z [www.7-zip.org] works well for this.
 
 
 Users may then open a terminal window, cd to install_directory, then, at the command line, type the executable name to start the game.  In Linux, you may also double click the icon for rufasok_gnu in file manager.
 
 Mac users must navigate to the installation directory in Finder and click the "rufasok.app" icon named "Rufasok".
 
-Windows users type:  binw32\rufasok.exe.  
+Windows users type:  binw32\rufasok32.exe.  
  
 
 The install_directory should contain subdirectories named "data", "gnulibs", "include", "games", "skins".
@@ -189,7 +166,7 @@ Note that the above windows built scripts might need to be adjusted to reference
 
 -------------------------------------------------------
 
-"ocmpss.sh" builds on OSX, and "lcmpd.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "puller" and "ibox".  Just type "ccc.sh puller" or "ccc.sh ibox" to compile on any platform, assuming the presence of an Ada compiler.
+"ocmpss.sh" builds on OSX, and "lcmpd.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "ipuller3" and "ibox3".  Just type "ccc.sh ipuller3" or "ccc.sh ibox3" to compile on any platform, assuming the presence of an Ada compiler.
 
 
 The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
@@ -206,15 +183,6 @@ On a linux build machine, you might have fixable link errors, depending on its c
 sudo ln -s libGL.so.1 libGL.so  (and enter the admin password)
 
 whence the linker should now be able to find what it wants.  But if there is more than one file libGL.so present on your system, make sure you use the best one;  i.e. the one that represents your accelerated-graphic-driver.
-
-
-
-
-
-
-
-
-
 
 
 
@@ -244,7 +212,30 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
 -------------------------------------------------
 
+
 ## Revision History:
+
+**ver 2.3.0 -- 25nov18**
+
+* Now using sdl v207 uniformly (all platforms);
+* Now using sfml v250 uniformly (all platforms);
+* Updated all sokoban solvers to favor robustness & good solutions;
+
+
+**ver 2.2.9 -- 08jul18**
+
+* Updated to using SDL v2.0.7;
+* Corrected code to handle DOS-formatted resume & puzzle files.
+
+
+**ver 2.2.8 -- 04jul18**
+
+* Added & improved 2nd built-in solver initiated with numeric-keypad "=" key.  This might solve problems that stump the 1st solver [using the normal keyboard "=" key].  [Not accessible on laptops?]
+* Added a "Solution not found" message when a built-in solver fails within 10 seconds.
+* Updated AdaPngLib, AdaZLib;
+* Put Windows DLLs, EXEs into ./binw32/
+
+
 
 **ver 2.2.7 -- 1apr18**
 
@@ -321,3 +312,10 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 * added (z) to menu, a keystroke that creates a setpoint (reZero) such that subsequent restarts (r) actually restore this configuration instead of the initial configuration.  Use this when you have made progress but then want to embark on various alternate speculative strategies.
 * Within a game session, the current level attempted in each file is now preserved as one moves between files.
 
+
+-------------------------------------------------
+RufasSok Autosolver in action:
+
+https://youtu.be/_OKd3MQ8VUQ
+
+-------------------------------------------------
