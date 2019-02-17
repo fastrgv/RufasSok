@@ -20,6 +20,13 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.1/asok30dec18.7z
 ## What's new:
 
 
+**ver 2.3.2 -- 17feb19**
+
+* Added closeWindow handler;
+* Fixed window resize errors;
+* Fixed font sizing errors;
+
+
 **ver 2.3.1 -- 3dec18**
 
 * Updated to SDL2 v2.0.8 (all 3 platforms);
