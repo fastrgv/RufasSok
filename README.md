@@ -19,6 +19,12 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.2/asok17feb19.7z
 
 ## What's new:
 
+**ver 2.3.3 -- 16jun19**
+
+* Improved window resize & reposition code.
+* Improved autosolvers for more robustness.
+* Separate, more readable help screen.
+* Autosolver #2 now accessed using "." key, which is universally available on laptops, etc.
 
 **ver 2.3.2 -- 17feb19**
 
