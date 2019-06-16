@@ -142,7 +142,8 @@ Note that the (h) key brings up a help menu that looks like this:
 * KP(<)   = smaller
 * (z)   = reZero (setPoint)...subsequent presses of (r)-key will restore this configuration
 * (c)   = next skin Color
-* (=)   = try autosolver
+* (=)   = try autosolver #1
+* (.)   = try autosolver #2
 -----------------------------------------------------------------
 
 ## Adding Your Own Sokoban Files
