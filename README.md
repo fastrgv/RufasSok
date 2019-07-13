@@ -9,35 +9,24 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.3/asok16jun19.7z
 
 
 
-
-
-
-
-
 # RufaSok
 -------------------------------------------------------------
 
 ## What's new:
 
-**ver 2.3.3 -- 16jun19**
 
-* Improved window resize & reposition code.
-* Improved autosolvers for more robustness.
-* Separate, more readable help screen.
-* Autosolver #2 now accessed using "." key, which is universally available on laptops, etc.
+**ver 2.3.4 -- 14jul19**
 
-**ver 2.3.2 -- 17feb19**
-
-* Added closeWindow handler;
-* Fixed window resize errors;
-* Fixed font sizing errors;
+* Updated SDL2 to version 2.0.9;
+* Updated Ada binding to SDL2;
+* Added user-controlled autosolver timeout;
+* Corrected error in single-puzzle commandline test mode;
+* Now use 9-key to enlarge, 1-key to shrink window, for better laptop control.
 
 
-**ver 2.3.1 -- 3dec18**
+**See complete revision history at end of file**
 
-* Updated to SDL2 v2.0.8 (all 3 platforms);
 
-See complete revision history at end of file
 
 -----------------------------------------------------------------
 
@@ -45,9 +34,7 @@ See complete revision history at end of file
 
 This is a minimalistic version of the Sokoban puzzle game with 2 external solvers, and two embedded auto-solvers.
 
-This implementation is fully OpenGL 3.3 with no "deprecated" functions.
-
-It has undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (+) and smaller (-) keys on the numeric keypad help you adjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys, or WASD keys.  The objective is to push all the movable objects onto their targets.  And now the (=)-key triggers an embedded solver that helps you when you get stuck.
+It has undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (9)-key and smaller (1)-key  help you adjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys, or WASD keys.  The objective is to push all the movable objects onto their targets.  And now the (=)-key triggers an embedded solver that helps you when you get stuck.
 
 --------------------------------------------
 ## Features
@@ -63,13 +50,16 @@ It has undo (u), restart (r), and setpoint (z) functions.  Each data file has se
 
 ----------------------------------------------
 ## Embedded Autosolver Function
-Two autosolvers are now embedded within this application so that pressing the ("=")-key at any time initiates an attempt by the primary solver to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the equal-key to single-step toward the solution.  Otherwise you will see no such prompt.  This primary solver is good for small and dense layouts.
+Two autosolvers are now embedded within this application so that pressing the (=)-key at any time initiates an attempt by the primary solver to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
 
-Similarly, the 2nd alternate solver is initiated with the numeric keypad ("=")-key.
+Similarly, the 2nd alternate solver is initiated with the (".")-key.
 
 Thusly, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the equal-key and proceed manually.  This really helps when you cannot see what your next move should be.
 
 Embedded autosolver failure might imply the present state of the puzzle is impossible to solve, or simply that the autosolver failed due to time constraint, or insufficient capability.
+
+Finally, a single command-line argument (decimal float) specifies a persistent timeout interval to wait for the internal autosolver before giving up.  The default is 10.0 seconds.  A new setting remains in effect until a different setting is specified using a command-line argument.
+
 
 ## External Autosolvers
 Remember that there are still two external autosolvers without time constraints.  Subject to several limitations, typing: "solver-name puzzle-file-name.sok maxlevels level-number" will attempt to solve a particular puzzle for you, where solver-name is either "ipuller3" or "ibox3".  There are many large or sparse [lishout] puzzles these solvers cannot handle, but they are pretty good at sovling the small dense ones.  Use the script ccc.sh to compile either solver for your operating system (assuming the presence of an Ada compiler).
@@ -94,9 +84,9 @@ EG on OSX type:
 ----------------------------------------------
 
 ## what is special about this project?
-Uses the Ada programming language and fully modern OpenGL methods, with textures, shaders and uniforms.  Achieves version 3.3 core profile contexts.  Compiles and runs on MSwin32, GNU/Linux and Mac OS-X systems.
+It uses the Ada programming language and modern OpenGL methods, with textures, shaders and uniforms.  Compiles and runs on Windows, GNU/Linux and Mac OSX systems.
 
-Focusing on portability and open source freedom, this project relies on a thin SDL2 binding, a thin OpenGL binding from "Lumen", a PNG reader by Stephen Sanguine, and SFML-Audio (because of its elegant audio interface).
+Focusing on portability, transparency, and open source freedom, this project relies exclusively on F.O.S.S. tools:  a thin SDL2 binding, a thin OpenGL binding, a PNG reader by Stephen Sanguine & Dimitry Anisimkov, SFML-Audio with a homebrew binding, and a GNAT compiler.
 
 ------------------------------------------------
 
@@ -138,12 +128,19 @@ Note that the (h) key brings up a help menu that looks like this:
 * (p)   = previous-puzzle in current file
 * (R-shift) = next-file
 * (L-shift) = previous-file
-* KP(>)   = bigger
-* KP(<)   = smaller
+* (9)   = bigger
+* (1)   = smaller
 * (z)   = reZero (setPoint)...subsequent presses of (r)-key will restore this configuration
 * (c)   = next skin Color
 * (=)   = try autosolver #1
 * (.)   = try autosolver #2
+-----------------------------------------------------------------
+
+Linux Note:  a "mouse" or "sloppy" window focus policy might allow
+	window focus to slip away while changing puzzles.  In this case,
+	simply move the cursor back onto the puzzle window.  This
+	annoyance does NOT occur with a "click" policy.
+
 -----------------------------------------------------------------
 
 ## Adding Your Own Sokoban Files
@@ -176,13 +173,13 @@ to tackle level 2 from the original_50 sokoban file.  In this single-file mode, 
 
 ## Build instructions:
 
-**msWin32** => prep-path.bat, wcmp0.bat, wcmp.bat
+**msWin32** => wbuildall.bat
 
 Note that the above windows built scripts might need to be adjusted to reference your actual installation directory for 32bit AdaCore 2017 compiler.
 
 -------------------------------------------------------
 
-"ocmpss.sh" builds on OSX, and "lcmpd.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "ipuller3" and "ibox3".  Just type "ccc.sh ipuller3" or "ccc.sh ibox3" to compile on any platform, assuming the presence of an Ada compiler.
+"obuildall.sh" builds on OSX, and "lbuildall.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "ipuller3" and "ibox3".  Just type "ccc.sh ipuller3" or "ccc.sh ibox3" to compile on any platform, assuming the presence of an Ada compiler.
 
 
 The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
@@ -231,6 +228,26 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
 ## Revision History:
 
+**ver 2.3.3 -- 16jun19**
+
+* Improved window resize & reposition code.
+* Improved autosolvers for more robustness.
+* Separate, more readable help screen.
+* Autosolver #2 now accessed using "." key, which is universally available on laptops, etc.
+
+
+**ver 2.3.2 -- 17feb19**
+
+* Added closeWindow handler;
+* Fixed window resize errors;
+* Fixed font sizing errors;
+
+
+**ver 2.3.1 -- 30dec18**
+
+* Updated to SDL2 v2.0.8 (all 3 platforms);
+
+
 **ver 2.3.0 -- 25nov18**
 
 * Now using sdl v207 uniformly (all platforms);
@@ -250,7 +267,6 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 * Added a "Solution not found" message when a built-in solver fails within 10 seconds.
 * Updated AdaPngLib, AdaZLib;
 * Put Windows DLLs, EXEs into ./binw32/
-
 
 
 **ver 2.2.7 -- 1apr18**
@@ -335,3 +351,5 @@ RufasSok Autosolver in action:
 https://youtu.be/_OKd3MQ8VUQ
 
 -------------------------------------------------
+
+
