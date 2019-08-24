@@ -14,6 +14,11 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.4/asok14jul19.7z
 
 ## What's new:
 
+**ver 2.3.5 -- 25aug19**
+
+* Updated embedded autosolvers.  In particular, the alternate solver is faster but the solutions are non-optimal.
+* Fixed embedded solver failures and improved interface behavior.
+
 
 **ver 2.3.4 -- 14jul19**
 
