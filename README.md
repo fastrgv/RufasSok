@@ -14,6 +14,11 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.5/as25aug19.7z
 
 ## What's new:
 
+**ver 2.3.6 -- 26nov19**
+
+* Repaired a library problem with GNU/Linux build that limited portability.
+* No problems with Mac/OSX or M.S. Windows builds.
+
 **ver 2.3.5 -- 25aug19**
 
 * Updated embedded autosolvers.  In particular, the alternate solver is faster but the solutions are non-optimal.
