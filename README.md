@@ -5,7 +5,7 @@ RufasSok is a minimalistic version of the Sokoban puzzle game with embedded auto
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.3.5/as25aug19.7z
+https://github.com/fastrgv/RufasSok/releases/download/v2.3.6/as26nov19.7z
 
 
 
