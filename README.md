@@ -5,7 +5,7 @@ RufasSok is a minimalistic version of the Sokoban puzzle game with embedded auto
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.3.6/as26nov19.7z
+https://github.com/fastrgv/RufasSok/releases/download/v2.4.0/as4jan20.7z
 
 
 
@@ -26,19 +26,6 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.6/as26nov19.7z
 * Repaired a library problem with GNU/Linux build that limited portability.
 * No problems with Mac/OSX or M.S. Windows builds.
 
-**ver 2.3.5 -- 25aug19**
-
-* Updated embedded autosolvers.  In particular, the alternate solver is faster but the solutions are non-optimal.
-* Fixed embedded solver failures and improved interface behavior.
-
-
-**ver 2.3.4 -- 14jul19**
-
-* Updated SDL2 to version 2.0.9;
-* Updated Ada binding to SDL2;
-* Added user-controlled autosolver timeout;
-* Corrected error in single-puzzle commandline test mode;
-* Now use 9-key to enlarge, 1-key to shrink window, for better laptop control.
 
 
 **See complete revision history at end of file**
