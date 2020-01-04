@@ -14,6 +14,13 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.3.6/as26nov19.7z
 
 ## What's new:
 
+
+**ver 2.4.0 -- 04jan20**
+
+* Converted to GLFW3;
+* Improved compile scripts;
+* Improved key bindings;
+
 **ver 2.3.6 -- 26nov19**
 
 * Repaired a library problem with GNU/Linux build that limited portability.
@@ -50,7 +57,7 @@ It has undo (u), restart (r), and setpoint (z) functions.  Each data file has se
 ## Features
 
 * runs on Windows, OSX, Linux;
-* uses SDL2;
+* uses GLFW2;
 * works on Retina displays;
 * uses SFML for applause sound;
 * all runtime files are in ./data/
@@ -96,7 +103,7 @@ EG on OSX type:
 ## what is special about this project?
 It uses the Ada programming language and modern OpenGL methods, with textures, shaders and uniforms.  Compiles and runs on Windows, GNU/Linux and Mac OSX systems.
 
-Focusing on portability, transparency, and open source freedom, this project relies exclusively on F.O.S.S. tools:  a thin SDL2 binding, a thin OpenGL binding, a PNG reader by Stephen Sanguine & Dimitry Anisimkov, SFML-Audio with a homebrew binding, and a GNAT compiler.
+Focusing on portability, transparency, and open source freedom, this project relies exclusively on F.O.S.S. tools:  a thin GLFW3 binding, a thin OpenGL binding, a PNG reader by Stephen Sanguine & Dimitry Anisimkov, SFML-Audio with a homebrew binding, and a GNAT compiler.
 
 ------------------------------------------------
 
@@ -138,8 +145,8 @@ Note that the (h) key brings up a help menu that looks like this:
 * (p)   = previous-puzzle in current file
 * (R-shift) = next-file
 * (L-shift) = previous-file
-* (9)   = bigger
-* (1)   = smaller
+* (f2)   = bigger
+* (f1)   = smaller
 * (z)   = reZero (setPoint)...subsequent presses of (r)-key will restore this configuration
 * (c)   = next skin Color
 * (=)   = try autosolver #1
