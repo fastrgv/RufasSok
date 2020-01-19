@@ -14,6 +14,9 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.4.0/as15jan20.7z
 
 ## What's new:
 
+**ver 2.4.1 -- 18jan20**
+
+* Vastly improved linux portability.
 
 **ver 2.4.0 -- 04jan20**
 
