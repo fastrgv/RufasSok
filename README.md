@@ -14,18 +14,24 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.4.1/as18jan20.7z
 
 ## What's new:
 
-**ver 2.4.1 -- 18jan20**
+**ver 2.4.2 -- 19sep20**
+* Updated all glfw libs to v3.3.2.
+* Removed unused linux libraries.
+* Included [yet unused] linux sound library with soundloop capability.
+* Added on-screen message when setpoint is saved.
+* Added "rufasok.bat" for Windows users.
+* Made direct ALSA sound the default build for linux.
 
+
+**ver 2.4.1 -- 18jan20**
 * Vastly improved linux portability.
 
 **ver 2.4.0 -- 04jan20**
-
 * Converted to GLFW3;
 * Improved compile scripts;
 * Improved key bindings;
 
 **ver 2.3.6 -- 26nov19**
-
 * Repaired a library problem with GNU/Linux build that limited portability.
 * No problems with Mac/OSX or M.S. Windows builds.
 
