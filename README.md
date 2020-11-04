@@ -5,7 +5,7 @@ RufasSok is a minimalistic version of the Sokoban puzzle game with embedded auto
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.4.2/as19sep20.7z
+https://github.com/fastrgv/RufasSok/releases/download/v2.5.0/as3nov20.7z
 
 
 
@@ -13,6 +13,10 @@ https://github.com/fastrgv/RufasSok/releases/download/v2.4.2/as19sep20.7z
 -------------------------------------------------------------
 
 ## What's new:
+
+**ver 2.5.0 -- 3nov20**
+* Replaced SFML-audio with simpler asynchronous calls to system WAV players.
+* Greatly simplified build process.
 
 **ver 2.4.2 -- 19sep20**
 * Updated all glfw libs to v3.3.2.
