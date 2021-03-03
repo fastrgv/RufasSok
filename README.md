@@ -152,6 +152,7 @@ Note that the (h) key brings up a help menu that looks like this:
 * (c)   = next skin Color
 * (=)   = try autosolver #1 (iplr3r)
 * (.)   = try autosolver #2 (hbox4)
+* (,)   = try autosolver #3 (ibox3r)
 * box-click: possible destinations
 * goal-click: possible sources
 -----------------------------------------------------------------
