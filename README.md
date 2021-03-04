@@ -47,7 +47,7 @@ It has undo (u), restart (r), and setpoint (z) functions.  Each data file has se
 * all runtime files are in ./data/
 * all puzzle files are in ./games/
 * includes 3 external autosolvers:  iplr3r, ibox3r, hbox4
-* includes 2 embedded autosolvers that help you to learn.
+* includes 3 embedded autosolvers that help you to learn.
 
 ----------------------------------------------
 ## Embedded Autosolver Function
