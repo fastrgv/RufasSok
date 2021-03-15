@@ -106,7 +106,8 @@ The linux-build is among very few modern OpenGL games where a single pre-built e
 Mac users see "osx-setup.txt".
 Windows users see "windows-setup.txt".
 
-Unzip the archive.  On Windows, 7z [www.7-zip.org] works well for this.
+Unzip the archive.  On Windows, 7z [www.7-zip.org] works well for this. The proper command to extract the archive and maintain the directory structure is "7z x filename".
+
 
 Users may then open a terminal window, cd to install_directory, then, at the command line, type the executable name to start the game.  
 
