@@ -20,6 +20,11 @@ Type "7z x filename" to extract the archive.
 
 ## What's new:
 
+**ver 2.5.4 -- 13oct2021**
+* Enabled normal window exit.
+* Fixed occasional bad sizing at startup.
+* Updated libraries.
+
 **ver 2.5.3 -- 15apr2021**
 * Increased box limit to allow more puzzles to function.
 * Added option to keep window focus while playing (f-key).
