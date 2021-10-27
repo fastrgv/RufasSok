@@ -20,6 +20,10 @@ Type "7z x filename" to extract the archive.
 
 ## What's new:
 
+**ver 2.5.5 -- 28oct2021**
+* Improved adaOpenAL binding code...rufasok is now buildable with [GNU Compiler Collection] GNAT, as well as all AdaCore versions.
+* Updated glext.lib.
+
 **ver 2.5.4 -- 13oct2021**
 * Enabled normal window exit.
 * Fixed occasional bad sizing at startup.
