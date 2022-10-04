@@ -20,6 +20,17 @@ Type "7z x filename" to extract the archive.
 
 ## What's new:
 
+
+
+**ver 2.5.6 -- 5oct2022**
+
+* More clearly identified two cc-by-nc-licensed puzzle sets as not compatible with GPLv3 license: (miniNC_60.sok, magiNC_100.sok).
+* Updated shared linux libglfw.
+* Updated Windows build to use easy-to-install 64-bit GNU Ada.
+* Removed all scripts that reference the now defunct AdaCore compilers.
+* Removed 32-bit Windows build to provide maximal memory for solvers.
+
+
 **ver 2.5.5 -- 28oct2021**
 * Improved adaOpenAL binding code...rufasok is now buildable with [GNU Compiler Collection] GNAT, as well as all AdaCore versions.
 * Updated glext.lib.
@@ -64,11 +75,17 @@ It has undo (u), restart (r), and setpoint (z) functions.  Each data file has se
 * includes 3 external autosolvers:  iplr3r, ibox3r, hbox4
 * includes 3 embedded autosolvers that help you to learn.
 
+* no installation
+* no dependencies
+* simply unzip in your Downloads directory, and run;
+* or unzip onto a USB flash drive [w/same file format] and run.
+
 ----------------------------------------------
 ## Embedded Autosolver Function
-Two autosolvers are now embedded within this application so that pressing the (=)-key at any time initiates an attempt by the primary solver to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
+Three autosolvers are now embedded within this application so that pressing the ("=")-key at any time initiates an attempt by the primary solver [puller] to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
 
-Similarly, the 2nd alternate solver is initiated with the (".")-key.
+Similarly, the 2nd alternate solver [hbox4] is initiated with the (".")-key.
+And the 3rd alternate solver [ibox] is initiated with the (",")-key.
 
 Thus, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the solver and proceed manually.  This really helps when you cannot see what your next move should be.
 
@@ -82,7 +99,7 @@ Finally, a single command-line argument (decimal float) specifies a persistent t
 ## External Autosolvers
 Remember that there are still three external autosolvers without time constraints.  Subject to several limitations, typing: "solver-name puzzle-file-name.sok maxlevels level-number" will attempt to solve a particular puzzle for you, where solver-name is either "iplr3r" or "ibox3r".  There are many large or sparse [lishout] puzzles the first two solvers cannot handle, but they are pretty good at sovling the small dense ones.  Use the script ccc.sh to compile either solver for your operating system (assuming the presence of an Ada compiler).
 
-The command to build them both [on OSX/linux] is simply:
+The command to build them all [on OSX/linux] is simply:
 	ccc[gnu|osx].sh ibox3r
 	ccc[gnu|osx].sh iplr3r
 	ccc[gnu|osx].sh hbox4
@@ -128,23 +145,20 @@ Users may then open a terminal window, cd to install_directory, then, at the com
 
 ----------------------------------------------------------------------
 In Linux type "rufasok_gnu" OR you may also double click the icon for rufasok_gnu in file manager.
+The command rufasok_gnu 20.0 sets the autosolver-wait to 20 seconds...double the default. This might help when using the second method ".", which is hbox, the most powerful of the 3.
 
-The distributed linux executable requires glibc v2.14 or newer.  That means if your distribution is older, it might not run, and you will need to recompile.
-
-----------------------------------------------------------------------
-Mac users must navigate to the installation directory in Finder and click the "rufasok.app" icon named "Rufasok".
-
-----------------------------------------------------------------------
-Windows users type:  "rufasok.bat"
- 
-----------------------------------------------------------------------
-
-Note that the Windows executables can be run on linux using wine thusly:
-
+You can also use the Windows executable under wine, thusly:
 	* wine cmd < rufasok.bat
 	* wine binw64/rufasok.exe
 
 ----------------------------------------------------------------------
+Mac users must navigate to the installation directory in Finder and click the "rufasok.app" icon named "Rufasok". Alternatively type rufasok_osx 10.0
+
+----------------------------------------------------------------------
+Windows users type:  "rufasok.bat", or to reset solver wait to 20 seconds type binw64\rufasok.exe 10.0
+ 
+----------------------------------------------------------------------
+
 
 
 
@@ -178,7 +192,7 @@ Note that the (h) key brings up a help menu that looks like this:
 * (1,f1) = smaller
 * (c)   = next skin Color
 * (=)   = try autosolver #1 (iplr3r)
-* (.)   = try autosolver #2 (hbox4)
+* (.)   = try autosolver #2 (hbox4...most capable)
 * (,)   = try autosolver #3 (ibox3r)
 * box-click: possible destinations [not perfect]
 * goal-click: possible sources [not perfect either]
@@ -220,17 +234,18 @@ to tackle level 2 from the original_50 sokoban file.  In this single-file mode, 
 ## Build Requirements:
 * a recent GNAT Ada compiler from AdaLibre;
 * graphics card that supports OpenGL version 3.3 or later;
-* Xcode g++ compiler, if using OS-X
 
 ## Build instructions:
 
-**msWin32** => wbuildall.bat
+**msWin64** => setpath64.bat + wbuildall.bat
 
-Note that the above windows built scripts might need to be adjusted to reference your actual installation directory for 32bit AdaCore 2017 compiler.
+Note that the above windows built scripts might need to be adjusted.
+Please read ~/docs/gnuAdaOnWindows.txt.
 
 -------------------------------------------------------
 
-"obuildall.sh" builds on OSX, and "lbuildall.sh" is for GNU/Linux.  ccc.sh is the build script for the autosolvers "iplr3r" and "iboxr3".  Just type "ccc.sh iplr3r" or "ccc.sh ibox3r" to compile on any platform, assuming the presence of an Ada compiler.
+"obuildall.sh" builds on OSX, and "lbuildall.sh" is for GNU/Linux.  cccgnu.sh/cccosx.sh are the build scripts for the autosolvers "hbox4","iplr3r" and "iboxr3".
+
 
 
 The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
@@ -241,16 +256,9 @@ The distributed linux executable requires glibc v2.14 or newer.  That means if y
 
 If the delivered GNU/Linux binary does not run, try:
 
-* Manually install GNAT GPL from libre.adacore.com/download/.
+* Use wine and the Windows EXE; or
+* Manually install GNU Ada.
 * Rerun the compile script lcmpd.sh or lcmpd2.sh.
-
-### Fixable Link Problems during linux build:
-
-On a linux build machine, you might have fixable link errors, depending on its configuration.  If, for example, you are missing "libz", you can simply copy "libz.so" from the AdaCore ~/lib/ directory into /usr/local/lib/.  If "libGL" cannot be found, this literally means "libGL.so" was absent.  But you might have "libGL.so.1" present.  In this case, simply create a softlink by changing to the libGL directory, then type the line:
-
-sudo ln -s libGL.so.1 libGL.so  (and enter the admin password)
-
-whence the linker should now be able to find what it wants.  But if there is more than one file libGL.so present on your system, make sure you use the best one;  i.e. the one that represents your accelerated-graphic-driver.
 
 
 
@@ -262,7 +270,7 @@ whence the linker should now be able to find what it wants.  But if there is mor
 RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
 
- Copyright (C) 2021  <fastrgv@gmail.com>
+ Copyright (C) 2022  <fastrgv@gmail.com>
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -279,6 +287,30 @@ RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
 -------------------------------------------------
 
+## Download Sites for all my games:
+https://github.com/fastrgv?tab=repositories
+https://www.indiedb.com/members/fastrgv/games
+https://fastrgv.itch.io
+https://sourceforge.net/u/fastrgv/profile/
+https://gamejolt.com/@fastrgv/games
+
+
+
+-------------------------------------------------
+
+## Media Files
+
+It is generally my intention to use media with copyrights or licenses that are compatible with GPLv3. Please notify me if you believe there is an incompatibility, and it will be removed ASAP, eg a CC-by-NC license is NOT GPL compatible.
+
+## Puzzle Files (./games/.sok)
+
+There are two puzzle files known to have a non-commercial encumbrance that is not compatible with the GPL license: magiNC_100.sok, miniNC_60.sok. These two should be deleted by anyone seeking to maintain GPL-compatibility. They are included because they are great puzzles and magi is one of my favorites.
+
+
+### SoundFiles (applause,fanfare,whoosh)
+...are from freesound.org and are covered by the Creative Commons CC0 license documented in the accompanying file creativeCommonsCC0.txt.
+
+-------------------------------------------------
 
 ## Revision History:
 
@@ -333,5 +365,6 @@ RufasSok Autosolver in action:
 https://youtu.be/_OKd3MQ8VUQ
 
 -------------------------------------------------
+
 
 
