@@ -14,42 +14,21 @@ Type "7z x filename" to extract the archive.
 
 
 
-# RufaSok  using GLFW3, OpenAL audio
+
+# RufaSok
+	Minimalist Sokoban
+	using GLFW3, OpenAL audio
+	with embedded live solvers
 
 -------------------------------------------------------------
 
 ## What's new:
 
-
-
-**ver 2.5.6 -- 5oct2022**
-
-* More clearly identified two cc-by-nc-licensed puzzle sets as not compatible with GPLv3 license: (miniNC_60.sok, magiNC_100.sok).
-* Updated shared linux libglfw.
-* Updated Windows build to use easy-to-install 64-bit GNU Ada.
-* Removed all scripts that reference the now defunct AdaCore compilers.
-* Removed 32-bit Windows build to provide maximal memory for solvers.
-
-
-**ver 2.5.5 -- 28oct2021**
-* Improved adaOpenAL binding code...rufasok is now buildable with [GNU Compiler Collection] GNAT, as well as all AdaCore versions.
-* Updated glext.lib.
-
-**ver 2.5.4 -- 13oct2021**
-* Enabled normal window exit.
-* Fixed occasional bad sizing at startup.
-* Updated libraries.
-
-**ver 2.5.3 -- 15apr2021**
-* Increased box limit to allow more puzzles to function.
-* Added option to keep window focus while playing (f-key).
-* Added o-key to restore Original puzzle.
-* Repaired faulty undo = u-key to store initial Pos.
-* Upgraded to glfw v3.3.4.
-* Added several more families of puzzles.
-
-**ver 2.5.2 -- 4mar2021**
-* Added 3rd embedded solver accessed by (,)-key.
+**ver 2.5.7 -- 23sep2023**
+* All cc-by-nc-licensed puzzle sets have been removed for complete GPLv3 compatibility.
+* Updated splaypq utility.
+* Discontiued OSX development.
+* Added graceful shutdown in case of exception.
 
 **See complete revision history at end of file**
 
@@ -61,20 +40,43 @@ Type "7z x filename" to extract the archive.
 
 This is a minimalistic version of the Sokoban puzzle game with 3 external solvers, and 3 embedded auto-solvers designed to help you to learn to solve puzzles on your own.
 
-It has undo (u), restart (r), and setpoint (z) functions.  Each data file has several "levels".  The next (n) and previous (p) keys move between levels.  Bigger (f2)-key/(2)-key and smaller (f1)-key/(1)-key  help you proportianally readjust the size of the window.  The (left-shift) and (right-shift) keys move you to the previous or next puzzle files.  To move the "pusher" use the arrow keys, or WASD keys.  The objective is to push all the movable objects onto their targets.  And the embedded solvers help you a little, or a lot, when you get stuck.
+The objective is to push all the movable objects onto their targets.  And the embedded solvers can help you a little, or a lot, when you get stuck.
+
+### Controls
+
+solver keys [within parentheses]:
+
+*	(.) hbox4 [most capable]; 
+*	(=) bfs#1 [for small puzzles]; 
+*	(,) bfs#2 [medium]
+
+movement keys:	
+
+*	w    a    s    d
+*	(up) (lf) (dn) (rt)
+
+other keys:
+
+*	(u) undo
+*	(n) next level current set
+*	(p) previous level current set
+*	(Lshift) previous set
+*	(Rshift) next set
+*	(z) set a setpoint
+*	(r) reset to z-key setpoint
+*	(o) restart from beginning
+*	(esc) quit
 
 --------------------------------------------
 ## Features
 
-* runs on Windows, OSX(>=10.13,sep2017), Linux;  New linux binary now runs on many linux distros!
+* runs on Windows, Linux;  New linux binary now runs on many linux distros!
 * uses GLFW3;
-* works on Retina displays;
 * uses OpenAL for applause sound;
 * all runtime files are in ./data/
 * all puzzle files are in ./games/
 * includes 3 external autosolvers:  iplr3r, ibox3r, hbox4
 * includes 3 embedded autosolvers that help you to learn.
-
 * no installation
 * no dependencies
 * simply unzip in your Downloads directory, and run;
@@ -82,10 +84,9 @@ It has undo (u), restart (r), and setpoint (z) functions.  Each data file has se
 
 ----------------------------------------------
 ## Embedded Autosolver Function
-Three autosolvers are now embedded within this application so that pressing the ("=")-key at any time initiates an attempt by the primary solver [puller] to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
+Three autosolvers are now embedded within this application so that pressing the (=)-key or (,)-key at any time initiates an attempt to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These two embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
 
-Similarly, the 2nd alternate solver [hbox4] is initiated with the (".")-key.
-And the 3rd alternate solver [ibox] is initiated with the (",")-key.
+Similarly, the 3rd alternate solver [hbox4] is initiated with the (.)-key. It is the most capable embedded solver.
 
 Thus, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the solver and proceed manually.  This really helps when you cannot see what your next move should be.
 
@@ -99,33 +100,21 @@ Finally, a single command-line argument (decimal float) specifies a persistent t
 ## External Autosolvers
 Remember that there are still three external autosolvers without time constraints.  Subject to several limitations, typing: "solver-name puzzle-file-name.sok maxlevels level-number" will attempt to solve a particular puzzle for you, where solver-name is either "iplr3r" or "ibox3r".  There are many large or sparse [lishout] puzzles the first two solvers cannot handle, but they are pretty good at sovling the small dense ones.  Use the script ccc.sh to compile either solver for your operating system (assuming the presence of an Ada compiler).
 
-The command to build them all [on OSX/linux] is simply:
-	ccc[gnu|osx].sh ibox3r
-	ccc[gnu|osx].sh iplr3r
-	ccc[gnu|osx].sh hbox4
-
-and on Windows:
-	ccc.bat ibox3r
-	ccc.bat iplr3r
-	ccc.bat hbox4
-
 To run type:  [exeName puzzleFile TotalLevels LevelToSolve]
 
 EG on windows type:
 	binw64\iplr3r.exe games\pico_22.sok 22 3
 	...to solve the 3rd level in file pico_22.sok.
 
-EG on OSX type:
-	ibox3r_osx games/pico_22.sok 22 3
 
 EG on Linux type
-	hbox4_gnu games/pico_22.sok 22 3
+	hbox4 games/pico_22.sok 22 3
 
 ----------------------------------------------
 
 ## what is special about this project?
 
-It uses the Ada programming language and modern OpenGL methods, with textures, shaders and uniforms.  Compiles and runs on Windows, GNU/Linux and Mac OSX systems.
+It uses the Ada programming language and modern OpenGL methods, with textures, shaders and uniforms.  Compiles and runs on Windows, GNU/Linux systems.
 
 Focusing on portability, transparency, and open source freedom, this project relies exclusively on F.O.S.S. tools:  a thin GLFW3 binding, a thin OpenGL binding, a PNG reader by Stephen Sanguine & Dimitry Anisimkov, and a GNAT compiler.
 
@@ -135,38 +124,34 @@ The linux-build is among very few modern OpenGL games where a single pre-built e
 
 ## Setup & Running:
 
-Mac users see "osx-setup.txt".
 Windows users see "windows-setup.txt".
 
 Unzip the archive.  On Windows, 7z [www.7-zip.org] works well for this.
 The proper command to extract the archive and maintain the directory structure is "7z x filename".
 
-Users may then open a terminal window, cd to install_directory, then, at the command line, type the executable name to start the game.  
+Users may then open a terminal window, cd to install-directory, then, at the command line, type the executable name to start the game.  
 
 ----------------------------------------------------------------------
-In Linux type "rufasok_gnu" OR you may also double click the icon for rufasok_gnu in file manager.
-The command rufasok_gnu 20.0 sets the autosolver-wait to 20 seconds...double the default. This might help when using the second method ".", which is hbox, the most powerful of the 3.
+In Linux type "rufasok" OR you may also double click the icon for rufasok in file manager.
+The command rufasok 20.0 sets the autosolver-wait to 20 seconds...double the default. This might help when using the second method ".", which is hbox, the most powerful of the 3.
 
 You can also use the Windows executable under wine, thusly:
 	* wine cmd < rufasok.bat
 	* wine binw64/rufasok.exe
 
 ----------------------------------------------------------------------
-Mac users must navigate to the installation directory in Finder and click the "rufasok.app" icon named "Rufasok". Alternatively type rufasok_osx 10.0
-
-----------------------------------------------------------------------
-Windows users type:  "rufasok.bat", or to reset solver wait to 20 seconds type binw64\rufasok.exe 10.0
+Windows users type:  "rufasok.bat", or to reset solver wait to 10 seconds type binw64\rufasok.exe 10.0
  
 ----------------------------------------------------------------------
 
 
 
 
-The install_directory should contain subdirectories named "data", "gnulibs", "include", "games", "skins".
+The install-directory should contain subdirectories named "data", "libs", "games", "skins", "src", "buildScripts", "binw64", "docs".
 
 Pusher movement is accomplished using the arrow keys or the WASD keys.
 
-asok has the following skin options:
+rufasok has the following skin options:
 * gray bkgd
 * star bkgd
 * water bkgd
@@ -176,7 +161,9 @@ asok has the following skin options:
 
 -----------------------------------------------------------------
 
-Note that the (h) key brings up a help menu that looks like this:
+### Other Details
+
+The (h) key brings up a help menu that looks like this:
 
 * (f)   = grab/keep windows focus toggle (default=off)
 * (esc) = exit
@@ -199,7 +186,7 @@ Note that the (h) key brings up a help menu that looks like this:
 -----------------------------------------------------------------
 
 Linux Note:  a "mouse" or "sloppy" window focus policy might allow
-	window focus to slip away while changing puzzles (because the
+	window focus to slip away while changing puzzles (if the
 	new window no longer includes the pointer).  In this case,
 	simply move the cursor back onto the puzzle window.  This
 	annoyance does NOT occur with a systemwide "click" policy. 
@@ -216,11 +203,11 @@ Note also that a specific sokoban file may be tested by naming it on the termina
 
 	rufasok sokfilepath maxlevels startlevel
 
-where rufasok can be rufasok_gnu, rufasok_osx or rufasok.bat.
+where rufasok can be rufasok or rufasok.bat.
 
 For example on linux you could type
 
-	"rufasok_gnu games/original_50.sok 50 2"
+	"rufasok games/original_50.sok 50 2"
 
 to tackle level 2 from the original_50 sokoban file.  In this single-file mode, you can still use the next-level(n) & previous-level(p) keys, however, the next/previous files (R-shift/L-shift) keys are disabled.
 
@@ -237,18 +224,12 @@ to tackle level 2 from the original_50 sokoban file.  In this single-file mode, 
 
 ## Build instructions:
 
+**Linux** => mbuildall.sh
+
 **msWin64** => setpath64.bat + wbuildall.bat
 
 Note that the above windows built scripts might need to be adjusted.
 Please read ~/docs/gnuAdaOnWindows.txt.
-
--------------------------------------------------------
-
-"obuildall.sh" builds on OSX, and "lbuildall.sh" is for GNU/Linux.  cccgnu.sh/cccosx.sh are the build scripts for the autosolvers "hbox4","iplr3r" and "iboxr3".
-
-
-
-The Mac binary should run on any recent version of OS-X.  Simply navigate to the install directory in Finder and click on the icon.
 
 -------------------------------------------------------
 
@@ -261,6 +242,16 @@ If the delivered GNU/Linux binary does not run, try:
 * Rerun the compile script lcmpd.sh or lcmpd2.sh.
 
 
+The command to build the external autosolvers [on linux] is simply:
+	cccgnu.sh ibox3r
+	cccgnu.sh iplr3r
+	cccgnu.sh hbox4
+
+and on Windows:
+	ccc.bat ibox3r
+	ccc.bat iplr3r
+	ccc.bat hbox4
+
 
 
 
@@ -270,7 +261,7 @@ If the delivered GNU/Linux binary does not run, try:
 RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
 
- Copyright (C) 2022  <fastrgv@gmail.com>
+ Copyright (C) 2023  <fastrgv@gmail.com>
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -300,11 +291,7 @@ https://gamejolt.com/@fastrgv/games
 
 ## Media Files
 
-It is generally my intention to use media with copyrights or licenses that are compatible with GPLv3. Please notify me if you believe there is an incompatibility, and it will be removed ASAP, eg a CC-by-NC license is NOT GPL compatible.
-
-## Puzzle Files (./games/.sok)
-
-There are two puzzle files known to have a non-commercial encumbrance that is not compatible with the GPL license: magiNC_100.sok, miniNC_60.sok. These two should be deleted by anyone seeking to maintain GPL-compatibility. They are included because they are great puzzles and magi is one of my favorites.
+It is my intention to use media with copyrights or licenses that are compatible with GPLv3. Please notify me if you believe there is an incompatibility, and it will be removed ASAP, eg a CC-by-NC license is NOT GPL compatible.
 
 
 ### SoundFiles (applause,fanfare,whoosh)
@@ -313,6 +300,33 @@ There are two puzzle files known to have a non-commercial encumbrance that is no
 -------------------------------------------------
 
 ## Revision History:
+
+**ver 2.5.6 -- 5oct2022**
+* More clearly identified two cc-by-nc-licensed puzzle sets as not compatible with GPLv3 license: (miniNC_60.sok, magiNC_100.sok).
+* Updated shared linux libglfw.
+* Updated Windows build to use easy-to-install 64-bit GNU Ada.
+* Removed all scripts that reference the now defunct AdaCore compilers.
+* Removed 32-bit Windows build to provide maximal memory for solvers.
+
+**ver 2.5.5 -- 28oct2021**
+* Improved adaOpenAL binding code...rufasok is now buildable with [GNU Compiler Collection] GNAT, as well as all AdaCore versions.
+* Updated glext.lib.
+
+**ver 2.5.4 -- 13oct2021**
+* Enabled normal window exit.
+* Fixed occasional bad sizing at startup.
+* Updated libraries.
+
+**ver 2.5.3 -- 15apr2021**
+* Increased box limit to allow more puzzles to function.
+* Added option to keep window focus while playing (f-key).
+* Added o-key to restore Original puzzle.
+* Repaired faulty undo = u-key to store initial Pos.
+* Upgraded to glfw v3.3.4.
+* Added several more families of puzzles.
+
+**ver 2.5.2 -- 4mar2021**
+* Added 3rd embedded solver accessed by (,)-key.
 
 
 **ver 2.5.1 -- 20feb2021**
@@ -342,19 +356,6 @@ There are two puzzle files known to have a non-commercial encumbrance that is no
 * Converted to GLFW3;
 * Improved compile scripts;
 * Improved key bindings;
-
-
-
-**ver 2.3.6 -- 26nov19**
-
-* Repaired a library problem with GNU/Linux build that limited portability.
-* No problems with Mac/OSX or M.S. Windows builds.
-
-
-**ver 2.3.5 -- 25aug19**
-
-* Updated embedded autosolvers.  In particular, the alternate solver is faster but the solutions are non-optimal.
-* Fixed embedded solver failures and improved interface behavior.
 
 
 
