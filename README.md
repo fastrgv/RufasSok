@@ -15,7 +15,8 @@ Type "7z x filename" to extract the archive.
 
 
 
-# RufaSok
+
+# RufaSok ...
 	Minimalist Sokoban
 	using GLFW3, OpenAL audio
 	with embedded live solvers
@@ -24,7 +25,14 @@ Type "7z x filename" to extract the archive.
 
 ## What's new:
 
+
+**ver 2.5.8 -- 8oct2023**
+
+* Revived OSX support, but without a bundle, and built without using Xcode.
+
+
 **ver 2.5.7 -- 23sep2023**
+
 * All cc-by-nc-licensed puzzle sets have been removed for complete GPLv3 compatibility.
 * Updated splaypq utility.
 * Discontiued OSX development.
@@ -70,7 +78,7 @@ other keys:
 --------------------------------------------
 ## Features
 
-* runs on Windows, Linux;  New linux binary now runs on many linux distros!
+* runs on Windows, OSX, Linux;  New linux binary now runs on many linux distros!
 * uses GLFW3;
 * uses OpenAL for applause sound;
 * all runtime files are in ./data/
@@ -110,11 +118,14 @@ EG on windows type:
 EG on Linux type
 	hbox4 games/pico_22.sok 22 3
 
+EG on OSX type
+	hbox4_osx games/pico_22.sok 22 3
+
 ----------------------------------------------
 
 ## what is special about this project?
 
-It uses the Ada programming language and modern OpenGL methods, with textures, shaders and uniforms.  Compiles and runs on Windows, GNU/Linux systems.
+It uses the Ada programming language and modern OpenGL methods, with textures, shaders and uniforms.  Compiles and runs on Windows, OSX, GNU/Linux systems.
 
 Focusing on portability, transparency, and open source freedom, this project relies exclusively on F.O.S.S. tools:  a thin GLFW3 binding, a thin OpenGL binding, a PNG reader by Stephen Sanguine & Dimitry Anisimkov, and a GNAT compiler.
 
@@ -124,10 +135,17 @@ The linux-build is among very few modern OpenGL games where a single pre-built e
 
 ## Setup & Running:
 
+Mac/OSX users see "osx-setup.txt".
 Windows users see "windows-setup.txt".
 
-Unzip the archive.  On Windows, 7z [www.7-zip.org] works well for this.
-The proper command to extract the archive and maintain the directory structure is "7z x filename".
+Unzip the archive.  
+
+* On Linux & Windows, 7z [www.7-zip.org] works well for this. The proper command to extract the archive and maintain the directory structure is "7z x filename".
+
+* On OSX, Keka works well for 7Z files. The command-line for Keka is:
+	* /Applications/Keka.app/Contents/MacOS/Keka --cli 7z x (filename.7z)
+
+After the archive is unzipped...
 
 Users may then open a terminal window, cd to install-directory, then, at the command line, type the executable name to start the game.  
 
@@ -224,6 +242,10 @@ to tackle level 2 from the original_50 sokoban file.  In this single-file mode, 
 
 ## Build instructions:
 
+In the ~/buildScripts/ directory try:
+
+**Mac/OSX** => lbuildall.sh
+
 **Linux** => mbuildall.sh
 
 **msWin64** => setpath64.bat + wbuildall.bat
@@ -235,11 +257,17 @@ Please read ~/docs/gnuAdaOnWindows.txt.
 
 The distributed linux executable requires glibc v2.14 or newer.  That means if your distribution is older than june 2011, it probably will not run, and you will need to recompile.
 
+Note that linux users with wine installed can run with the command:
+
+	wine binw64/rufasok.exe
+
+
 If the delivered GNU/Linux binary does not run, try:
 
-* Use wine and the Windows EXE; or
+* Use wine and the Windows EXE, as above; or
+
 * Manually install GNU Ada.
-* Rerun the compile script lcmpd.sh or lcmpd2.sh.
+* Rerun the compile script lbuildall.sh.
 
 
 The command to build the external autosolvers [on linux] is simply:
@@ -356,16 +384,4 @@ It is my intention to use media with copyrights or licenses that are compatible 
 * Converted to GLFW3;
 * Improved compile scripts;
 * Improved key bindings;
-
-
-
-
--------------------------------------------------
-RufasSok Autosolver in action:
-
-https://youtu.be/_OKd3MQ8VUQ
-
--------------------------------------------------
-
-
 
