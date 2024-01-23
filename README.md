@@ -22,6 +22,7 @@ Type "7z x filename" to extract the archive.
 
 
 
+
 # RufaSok ...
 	Minimalist Sokoban
 	using GLFW3, OpenAL audio
@@ -30,6 +31,15 @@ Type "7z x filename" to extract the archive.
 -------------------------------------------------------------
 
 ## What's new:
+
+
+**ver 2.5.9 -- 24jan2024**
+
+* Upgraded hbox4 solvers, embedded & external. Now checks memory available.
+* Default method used by embedded hbox4 may now be set interactively.
+* Resizing is now done exclusively with mouse drag.
+* Fixed problem with the embedded ibox solver not respecting time limit.
+* Other code improvements & corrections.
 
 
 **ver 2.5.8 -- 8oct2023**
@@ -63,6 +73,7 @@ solver keys [within parentheses]:
 *	(.) hbox4 [most capable]; 
 *	(=) bfs#1 [for small puzzles]; 
 *	(,) bfs#2 [medium]
+*  (0..5) sets hbox4 method
 
 movement keys:	
 
@@ -98,9 +109,11 @@ other keys:
 
 ----------------------------------------------
 ## Embedded Autosolver Function
-Three autosolvers are now embedded within this application so that pressing the (=)-key or (,)-key at any time initiates an attempt to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These two embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
+Three autosolvers are now embedded within this application so that pressing the (=)-key or (,)-key or (.)-key at any time initiates an attempt to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These three embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
 
-Similarly, the 3rd alternate solver [hbox4] is initiated with the (.)-key. It is the most capable embedded solver.
+The 3rd alternate solver [hbox4] is initiated with the (.)-key. It is the most capable embedded solver.
+
+Note: all 3 solvers can fail if the puzzle is too large (256 or more valid puzzle positions).
 
 Thus, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the solver and proceed manually.  This really helps when you cannot see what your next move should be.
 
@@ -109,6 +122,26 @@ Note also that the solvers can tell you when you have gone too far and gotten yo
 Embedded autosolver failure might imply the present state of the puzzle is impossible to solve, or simply that the autosolver failed due to time constraint, or insufficient capability.
 
 Finally, a single command-line argument (decimal float) specifies a persistent timeout interval to wait for the internal autosolver before giving up.  The default is 10.0 seconds.  A new setting remains in effect until a different setting is specified using a command-line argument.
+
+
+The default method used by embedded solver Hbox4 [ (.)-key ] can now be reset using the k-key, where k is 0..5.
+
+
+### 6 method options for hbox4:
+
+	* 0 "quickest"
+	* 1 more "efficient"
+	* 2 suppress hungarian estimator (for dense puzzles)
+	* 3 like 0 but tries to reduce total moves
+	* 4 like 1 but tries to reduce total moves [default]
+	* 5 like 2 but tries to reduce total moves
+
+For further details see:
+
+	* https://sourceforge.net/projects/hbox4/
+
+
+
 
 
 ## External Autosolvers
@@ -295,7 +328,7 @@ and on Windows:
 RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
 
 
- Copyright (C) 2023  <fastrgv@gmail.com>
+ Copyright (C) 2024  <fastrgv@gmail.com>
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
