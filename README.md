@@ -23,14 +23,21 @@ Type "7z x filename" to extract the archive.
 
 
 
+
 # RufaSok ...
-	Minimalist Sokoban
-	using GLFW3, OpenAL audio
+	Minimalist Sokoban Game 
+	using OpenGL, GLFW3 & OpenAL audio
 	with embedded live solvers
 
 -------------------------------------------------------------
 
 ## What's new:
+
+
+**ver 2.6.0 -- 16dec2024**
+
+* Updated hbox4 to hbox5.
+* Updated embedded solver.
 
 
 **ver 2.5.9 -- 24jan2024**
@@ -41,19 +48,6 @@ Type "7z x filename" to extract the archive.
 * Fixed problem with the embedded ibox solver not respecting time limit.
 * Other code improvements & corrections.
 
-
-**ver 2.5.8 -- 8oct2023**
-
-* Revived OSX support, but without a bundle, and built without using Xcode.
-
-
-**ver 2.5.7 -- 23sep2023**
-
-* All cc-by-nc-licensed puzzle sets have been removed for complete GPLv3 compatibility.
-* Updated splaypq utility.
-* Discontiued OSX development.
-* Added graceful shutdown in case of exception.
-
 **See complete revision history at end of file**
 
 
@@ -62,7 +56,7 @@ Type "7z x filename" to extract the archive.
 
 ## RufaSok Introduction
 
-This is a minimalistic version of the Sokoban puzzle game with 3 external solvers, and 3 embedded auto-solvers designed to help you to learn to solve puzzles on your own.
+This is a minimalistic version of an interactive, OpenGL Sokoban puzzle game with 3 external solvers, and 3 embedded auto-solvers designed to help you to learn to solve puzzles on your own.
 
 The objective is to push all the movable objects onto their targets.  And the embedded solvers can help you a little, or a lot, when you get stuck.
 
@@ -70,10 +64,10 @@ The objective is to push all the movable objects onto their targets.  And the em
 
 solver keys [within parentheses]:
 
-*	(.) hbox4 [most capable]; 
+*	(.) hbox5 [most capable]; 
 *	(=) bfs#1 [for small puzzles]; 
 *	(,) bfs#2 [medium]
-*  (0..5) sets hbox4 method
+*  (0..5) sets hbox5 method [see details below]
 
 movement keys:	
 
@@ -100,18 +94,29 @@ other keys:
 * uses OpenAL for applause sound;
 * all runtime files are in ./data/
 * all puzzle files are in ./games/
-* includes 3 external autosolvers:  iplr3r, ibox3r, hbox4
+* includes 3 external autosolvers:  iplr3r, ibox3r, hbox5
 * includes 3 embedded autosolvers that help you to learn.
 * no installation
 * no dependencies
 * simply unzip in your Downloads directory, and run;
 * or unzip onto a USB flash drive [w/same file format] and run.
 
+To start the game type:
+
+on linux:
+	rufasok_gnu
+
+on osx:
+	rufasok_osx
+
+on windows:
+	rufasok64.bat
+
 ----------------------------------------------
 ## Embedded Autosolver Function
 Three autosolvers are now embedded within this application so that pressing the (=)-key or (,)-key or (.)-key at any time initiates an attempt to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These three embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
 
-The 3rd alternate solver [hbox4] is initiated with the (.)-key. It is the most capable embedded solver.
+The 3rd alternate solver [hbox5] is initiated with the (.)-key. It is the most capable embedded solver.
 
 Note: all 3 solvers can fail if the puzzle is too large (256 or more valid puzzle positions).
 
@@ -121,24 +126,24 @@ Note also that the solvers can tell you when you have gone too far and gotten yo
 
 Embedded autosolver failure might imply the present state of the puzzle is impossible to solve, or simply that the autosolver failed due to time constraint, or insufficient capability.
 
-Finally, a single command-line argument (decimal float) specifies a persistent timeout interval to wait for the internal autosolver before giving up.  The default is 10.0 seconds.  A new setting remains in effect until a different setting is specified using a command-line argument.
+Finally, a single command-line argument (decimal float) specifies a persistent timeout interval [in seconds] to wait for the internal autosolver before giving up.  The default is 10.0 seconds.  A new setting remains in effect until a different setting is specified using a command-line argument.
 
 
-The default method used by embedded solver Hbox4 [ (.)-key ] can now be reset using the k-key, where k is 0..5.
+The default method used by embedded solver Hbox5 [ (.)-key ] can now be set using the k-key, where k is 0..5.
 
 
-### 6 method options for hbox4:
+### 6 method options for hbox5:
 
 	* 0 "quickest"
 	* 1 more "efficient"
-	* 2 suppress hungarian estimator (for dense puzzles)
+	* 2 suppress hungarian estimator (eg. for dense puzzles)
 	* 3 like 0 but tries to reduce total moves
 	* 4 like 1 but tries to reduce total moves [default]
 	* 5 like 2 but tries to reduce total moves
 
 For further details see:
 
-	* https://sourceforge.net/projects/hbox4/
+	* https://sourceforge.net/projects/hbox4/    (4 is not a typo)
 
 
 
@@ -147,18 +152,18 @@ For further details see:
 ## External Autosolvers
 Remember that there are still three external autosolvers without time constraints.  Subject to several limitations, typing: "solver-name puzzle-file-name.sok maxlevels level-number" will attempt to solve a particular puzzle for you, where solver-name is either "iplr3r" or "ibox3r".  There are many large or sparse [lishout] puzzles the first two solvers cannot handle, but they are pretty good at sovling the small dense ones.  Use the script ccc.sh to compile either solver for your operating system (assuming the presence of an Ada compiler).
 
-To run type:  [exeName puzzleFile TotalLevels LevelToSolve]
+To run type:  [exeName puzzleFile LevelToSolve]
 
 EG on windows type:
-	binw64\iplr3r.exe games\pico_22.sok 22 3
+	binw64\iplr3r.exe games\pico_22.sok 3
 	...to solve the 3rd level in file pico_22.sok.
 
 
 EG on Linux type
-	hbox4 games/pico_22.sok 22 3
+	hbox5_gnu games/pico_22.sok 3
 
 EG on OSX type
-	hbox4_osx games/pico_22.sok 22 3
+	hbox5_osx games/pico_22.sok 3
 
 ----------------------------------------------
 
@@ -168,7 +173,14 @@ It uses the Ada programming language and modern OpenGL methods, with textures, s
 
 Focusing on portability, transparency, and open source freedom, this project relies exclusively on F.O.S.S. tools:  a thin GLFW3 binding, a thin OpenGL binding, a PNG reader by Stephen Sanguine & Dimitry Anisimkov, and a GNAT compiler.
 
-The linux-build is among very few modern OpenGL games where a single pre-built executable can run on multiple Linux distros without 3rd party add-ons!
+The linux-build can run on multiple Linux distros!
+The Windows build can run on Win10 + Win11.
+
+I am short of testers, and would appreciate any feedback...
+Open source Ada developers are welcome to help improve or extend this app.
+Developer or not, send comments, suggestions or questions to:
+fastrgv@gmail.com
+
 
 ------------------------------------------------
 
@@ -189,18 +201,42 @@ After the archive is unzipped...
 Users may then open a terminal window, cd to install-directory, then, at the command line, type the executable name to start the game.  
 
 ----------------------------------------------------------------------
-In Linux type "rufasok" OR you may also double click the icon for rufasok in file manager.
-The command rufasok 20.0 sets the autosolver-wait to 20 seconds...double the default. This might help when using the second method ".", which is hbox, the most powerful of the 3.
+
+In Linux type: 
+
+	rufasok_gnu
+
+The command
+
+	rufasok_gnu 20.0 
+
+sets the autosolver-wait to 20 seconds...double the default. 
+This might help, especially when using the hbox5 method (.)-key, 
+which the most powerful of the 3, and automatically quits if the 
+memory usage becomes excessive.
 
 You can also use the Windows executable under wine, thusly:
-	* wine cmd < rufasok.bat
+	* wine cmd < rufasok64.bat
 	* wine binw64/rufasok.exe
 
 ----------------------------------------------------------------------
-Windows users type:  "rufasok.bat", or to reset solver wait to 10 seconds type binw64\rufasok.exe 10.0
+Windows users type:  
+
+	rufasok64.bat 
+
+or to reset solver wait to 30 seconds type:
+
+	binw64\rufasok.exe 30.0
  
 ----------------------------------------------------------------------
+Mac users type:
 
+	rufasok_osx
+
+or
+
+	rufasok_osx 30.0
+----------------------------------------------------------------------
 
 
 
@@ -236,7 +272,7 @@ The (h) key brings up a help menu that looks like this:
 * (1,f1) = smaller
 * (c)   = next skin Color
 * (=)   = try autosolver #1 (iplr3r)
-* (.)   = try autosolver #2 (hbox4...most capable)
+* (.)   = try autosolver #2 (hbox5...most capable)
 * (,)   = try autosolver #3 (ibox3r)
 * box-click: possible destinations [not perfect]
 * goal-click: possible sources [not perfect either]
@@ -260,11 +296,13 @@ Note also that a specific sokoban file may be tested by naming it on the termina
 
 	rufasok sokfilepath maxlevels startlevel
 
-where rufasok can be rufasok or rufasok.bat.
+where rufasok can be 
+
+	rufasok_gnu, rufasok_osx, or rufasok64.bat
 
 For example on linux you could type
 
-	"rufasok games/original_50.sok 50 2"
+	"rufasok_gnu games/original_50.sok 50 2"
 
 to tackle level 2 from the original_50 sokoban file.  In this single-file mode, you can still use the next-level(n) & previous-level(p) keys, however, the next/previous files (R-shift/L-shift) keys are disabled.
 
@@ -283,14 +321,15 @@ to tackle level 2 from the original_50 sokoban file.  In this single-file mode, 
 
 In the ~/buildScripts/ directory try:
 
-**Mac/OSX** => lbuildall.sh
+**Mac/OSX** => obuildall.sh
 
-**Linux** => mbuildall.sh
+**Linux** => lbuildall.sh
 
-**msWin64** => setpath64.bat + wbuildall.bat
+**msWin64** => setpath64.bat + w64buildall.bat
 
-Note that the above windows built scripts might need to be adjusted.
-Please read ~/docs/gnuAdaOnWindows.txt.
+Of course, the above windows "setpath" script needs to be adjusted
+to reference you actual compiler installation directory.
+Please read carefully: ~/docs/gnuAdaOnWindows.txt.
 
 -------------------------------------------------------
 
@@ -309,15 +348,22 @@ If the delivered GNU/Linux binary does not run, try:
 * Rerun the compile script lbuildall.sh.
 
 
-The command to build the external autosolvers [on linux] is simply:
+The commands to build the external autosolvers:
+
+on Linux:
 	cccgnu.sh ibox3r
 	cccgnu.sh iplr3r
-	cccgnu.sh hbox4
+	cccgnu.sh hbox5
 
 and on Windows:
-	ccc.bat ibox3r
-	ccc.bat iplr3r
-	ccc.bat hbox4
+	ccc64.bat ibox3r
+	ccc64.bat iplr3r
+	ccc64.bat hbox5
+
+and on OSX:
+	cccosx.bat ibox3r
+	cccosx.bat iplr3r
+	cccosx.bat hbox5
 
 
 
@@ -325,7 +371,7 @@ and on Windows:
 ===================================================================
 ## License
 
-RufaSok itself is covered by the GNU GPL v3 as indicated in the sources:
+This app is covered by the GNU GPL v3 as indicated in the sources:
 
 
  Copyright (C) 2024  <fastrgv@gmail.com>
@@ -367,6 +413,16 @@ It is my intention to use media with copyrights or licenses that are compatible 
 -------------------------------------------------
 
 ## Revision History:
+
+**ver 2.5.8 -- 8oct2023**
+* Revived OSX support, but without a bundle, and built without using Xcode.
+
+
+**ver 2.5.7 -- 23sep2023**
+* All cc-by-nc-licensed puzzle sets have been removed for complete GPLv3 compatibility.
+* Updated splaypq utility.
+* Discontiued OSX development.
+* Added graceful shutdown in case of exception.
 
 **ver 2.5.6 -- 5oct2022**
 * More clearly identified two cc-by-nc-licensed puzzle sets as not compatible with GPLv3 license: (miniNC_60.sok, magiNC_100.sok).
@@ -414,7 +470,7 @@ It is my intention to use media with copyrights or licenses that are compatible 
 * Removed unused linux libraries.
 * Included [yet unused] linux sound library with soundloop capability.
 * Added on-screen message when setpoint is saved.
-* Added "rufasok.bat" for Windows users.
+* Added "rufasok64.bat" for Windows users.
 * Made direct ALSA sound the default build for linux.
 
 
