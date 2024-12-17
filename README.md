@@ -39,6 +39,7 @@ Type "7z x filename" to extract the archive.
 
 * Updated hbox4 to hbox5.
 * Updated embedded solver.
+* Moved all 9 external solvers into their own sub-directory.
 
 
 **ver 2.5.9 -- 24jan2024**
@@ -135,7 +136,6 @@ For example:
 
 initiates the Windows version using 30 second timeout rather than the 10 second default.
 
-**temporary workaround: ...this feature is not yet working properly. FTTB please manually edit the first line in ~/data/resume.txt to set the timeout value.**
 
 The default method used by embedded solver Hbox5 [ (.)-key ] can now be set using the k-key, where k is 0..5.
 
