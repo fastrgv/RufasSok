@@ -25,6 +25,7 @@ Type "7z x filename" to extract the archive.
 
 
 
+
 # RufaSok ...
 	Minimalist Sokoban Game 
 	using OpenGL, GLFW3 & OpenAL audio
@@ -35,20 +36,12 @@ Type "7z x filename" to extract the archive.
 ## What's new:
 
 
-**ver 2.6.0 -- 16dec2024**
+**ver 2.6.1 -- 01jan2025**
 
-* Updated hbox4 to hbox5.
-* Updated embedded solver.
-* Moved all 9 external solvers into their own sub-directory.
+* Fixed embedded solver hbox5 method 3; made other improvements.
+* Added "+", "-" number-keypad keys to adjust timeout.
+* Improved other two embedded solvers; and fixed memory leak.
 
-
-**ver 2.5.9 -- 24jan2024**
-
-* Upgraded hbox4 solvers, embedded & external. Now checks memory available.
-* Default method used by embedded hbox4 may now be set interactively.
-* Resizing is now done exclusively with mouse drag.
-* Fixed problem with the embedded ibox solver not respecting time limit.
-* Other code improvements & corrections.
 
 **See complete revision history at end of file**
 
@@ -69,6 +62,7 @@ solver keys [within parentheses]:
 *	(.) hbox5 [most capable]; 
 *	(=) bfs#1 [iplr; for small puzzles]; 
 *	(,) bfs#2 [ibox; medium]
+
 *  (0..5) sets hbox5 method [see details below]
 
 movement keys:	
@@ -77,6 +71,9 @@ movement keys:
 *	(up) (lf) (dn) (rt)
 
 other keys:
+
+*	(+) increase wait timeout (numKeypad)
+*	(-) decrease wait timeout (numKeypad)
 
 *	(u) undo
 *	(n) next level current set
@@ -128,21 +125,16 @@ Note also that the solvers can tell you when you have gone too far and gotten yo
 
 Embedded autosolver failure might imply the present state of the puzzle is impossible to solve, or simply that the autosolver failed due to time constraint, or insufficient capability.
 
-Finally, a single command-line argument (decimal float) specifies a persistent timeout interval [in seconds] to wait for the internal autosolver before giving up.  The default is 10.0 seconds.  A new setting remains in effect until a different setting is specified using another command-line argument.
 
-For example:
-
-	* binw64\rufasok.exe 30.0
-
-initiates the Windows version using 30 second timeout rather than the 10 second default.
+The default **timeout** used by embedded solvers is 10 seconds, but is adjustable using the (+)-key or (-)-key on the number keypad to increment or decrement by 10 seconds per press. This is the time to wait for the internal autosolvers before giving up.
 
 
-The default method used by embedded solver Hbox5 [ (.)-key ] can now be set using the k-key, where k is 0..5.
+Also, the default **method** used by embedded solver Hbox5 [ (.)-key ] can now be set using the k-key, where k is 0..5.
 
 
 ### 6 method options for hbox5:
 
-	* 0 "quickest"
+	* 0 "quickest" [initial default]
 	* 1 more "efficient"
 	* 2 suppress hungarian estimator (eg. for dense puzzles)
 	* 3 like 0 but tries to reduce total moves
@@ -163,15 +155,14 @@ Remember that there are still three external autosolvers without time constraint
 To run type:  [exeName puzzleFile LevelToSolve]
 
 EG on windows type:
-	binw64\iplr3r.exe games\pico_22.sok 3
+	external_solvers\iplr3r.exe games\pico_22.sok 3
 	...to solve the 3rd level in file pico_22.sok.
 
-
 EG on Linux type
-	hbox5_gnu games/pico_22.sok 3
+	external_solvers/ibox3r_gnu games/pico_22.sok 3
 
 EG on OSX type
-	hbox5_osx games/pico_22.sok 3
+	external_solvers/hbox5_osx games/pico_22.sok 3
 
 ----------------------------------------------
 
@@ -214,14 +205,6 @@ In Linux type:
 
 	rufasok_gnu
 
-The command
-
-	rufasok_gnu 20.0 
-
-sets the autosolver-wait to 20 seconds...double the default. 
-This might help, especially when using the hbox5 method (.)-key, 
-which the most powerful of the 3, and automatically quits if the 
-memory usage becomes excessive.
 
 You can also use the Windows executable under wine, thusly:
 	* wine cmd < rufasok64.bat
@@ -232,18 +215,15 @@ Windows users type:
 
 	rufasok64.bat 
 
-or to reset solver wait to 30 seconds type:
+or:
 
-	binw64\rufasok.exe 30.0
+	binw64\rufasok.exe
  
 ----------------------------------------------------------------------
 Mac users type:
 
 	rufasok_osx
 
-or
-
-	rufasok_osx 30.0
 ----------------------------------------------------------------------
 
 
@@ -266,7 +246,6 @@ rufasok has the following skin options:
 
 The (h) key brings up a help menu that looks like this:
 
-* (f)   = grab/keep windows focus toggle (default=off)
 * (esc) = exit
 * (u)   = undo last move
 * (r)   = reset to setpoint
@@ -276,26 +255,44 @@ The (h) key brings up a help menu that looks like this:
 * (R-shift) = next-file
 * (L-shift) = previous-file
 * (z)   = define setPoint...subsequent presses of (r)-key will restore THIS configuration
-* (2,f2) = bigger
-* (1,f1) = smaller
 * (c)   = next skin Color
 * (=)   = try autosolver #1 (iplr3r)
 * (.)   = try autosolver #2 (hbox5...most capable)
 * (,)   = try autosolver #3 (ibox3r)
 * box-click: possible destinations [not perfect]
 * goal-click: possible sources [not perfect either]
+
+* use mouse drag to change size of puzzle window
+
+* (f)   = toggle: grab/keep windows focus (default=off)
+
 -----------------------------------------------------------------
 
 Linux Note:  a "mouse" or "sloppy" window focus policy might allow
 	window focus to slip away while changing puzzles (if the
 	new window no longer includes the pointer).  In this case,
 	simply move the cursor back onto the puzzle window.  This
-	annoyance does NOT occur with a systemwide "click" policy. 
-	But now, the f-key toggles a game policy that forcibly keeps
-	focus, although it is generally considered improper to do this.
+	annoyance does NOT occur with a systemwide "click" policy.
+
+	Now the f-key toggles a game policy that forcibly keeps
+	focus, although it is generally considered improper
+	window-handling. So, remember to toggle it off if it
+	misbehaves.
+
 
 -----------------------------------------------------------------
 
+### Problems with "puller" or "ibox" embedded solvers
+These are old solvers that have significant limitations,
+including rapid growth of memory usage, puzzles that are 
+too large or have too many boxes to handle. 
+They seem to still exit gracefully, and when they do, 
+simply use "hbox5" using the period-key. On the other
+hand, the "puller" will generally give the most efficient 
+solutions, when it does work.
+
+
+-----------------------------------------------------------------
 ## Adding Your Own Sokoban Files
 
 Note that the file naming conventions must be maintained now that dynamic file loading is done after reading the ./games/ directory.  No underscores are permitted except one that precedes the integer that indicates the number of levels in the file.  The name format is thus anyname_nnn.sok.  Note that there is a standardized format for the online sokoban files themselves that I have attempted to respect and maintain.
@@ -335,8 +332,8 @@ In the ~/buildScripts/ directory try:
 
 **msWin64** => setpath64.bat + w64buildall.bat
 
-Of course, the above windows "setpath" script needs to be adjusted
-to reference you actual compiler installation directory.
+Of course, the above scripts need to be adjusted
+to reference your actual compiler installation directory.
 Please read carefully: ~/docs/gnuAdaOnWindows.txt.
 
 -------------------------------------------------------
@@ -382,7 +379,7 @@ and on OSX:
 This app is covered by the GNU GPL v3 as indicated in the sources:
 
 
- Copyright (C) 2024  <fastrgv@gmail.com>
+ Copyright (C) 2025  <fastrgv@gmail.com>
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -422,9 +419,20 @@ It is my intention to use media with copyrights or licenses that are compatible 
 
 ## Revision History:
 
+**ver 2.6.0 -- 16dec2024**
+* Updated hbox4 to hbox5.
+* Updated embedded solver.
+* Moved all 9 external solvers into their own sub-directory for less clutter.
+
+**ver 2.5.9 -- 24jan2024**
+* Upgraded hbox4 solvers, embedded & external. Now checks memory available.
+* Default method used by embedded hbox4 may now be set interactively.
+* Resizing is now done exclusively with mouse drag.
+* Fixed problem with the embedded ibox solver not respecting time limit.
+* Other code improvements & corrections.
+
 **ver 2.5.8 -- 8oct2023**
 * Revived OSX support, but without a bundle, and built without using Xcode.
-
 
 **ver 2.5.7 -- 23sep2023**
 * All cc-by-nc-licensed puzzle sets have been removed for complete GPLv3 compatibility.
