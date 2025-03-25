@@ -24,7 +24,10 @@ Type "7z x filename" to extract the archive.
 
 
 
-[
+alternate download link:
+https://sourceforge.net/projects/rufassok/files/latest/download
+
+
 
 # RufaSok ...
 	Minimalist Sokoban Game 
@@ -36,14 +39,17 @@ Type "7z x filename" to extract the archive.
 ## What's new:
 
 
-**ver 2.6.1 -- 01jan2025**
+**ver 2.6.3 -- 25mar2025**
 
-* Fixed embedded solver hbox5 method 3; made other improvements.
-* Added "+", "-" number-keypad keys to adjust timeout.
-* Improved other two embedded solvers; and fixed memory leak.
+* Added a REVERSE Sokoban game using a Puller & single autosolver: hbox.
+* Added 3 heuristic monitors in pusher version: #corrals, #blocked-rooms, #blocked-boxes.
 
 
-**See complete revision history at end of file**
+**ver 2.6.2 -- 3mar2025**
+
+* Updated & improved 3 sok-solvers.
+
+See complete revision history at end of file.
 
 
 
@@ -59,11 +65,11 @@ The objective is to push all the movable objects onto their targets.  And the em
 
 solver keys [within parentheses]:
 
-*	(.) hbox5 [most capable]; 
+*	(.) hbox [most capable]; 
 *	(=) bfs#1 [iplr; for small puzzles]; 
 *	(,) bfs#2 [ibox; medium]
 
-*  (0..5) sets hbox5 method [see details below]
+*  (0..9) sets hbox method [see details below]
 
 movement keys:	
 
@@ -74,7 +80,6 @@ other keys:
 
 *	(+) increase wait timeout (numKeypad)
 *	(-) decrease wait timeout (numKeypad)
-
 *	(u) undo
 *	(n) next level current set
 *	(p) previous level current set
@@ -93,7 +98,7 @@ other keys:
 * uses OpenAL for applause sound;
 * all runtime files are in ./data/
 * all puzzle files are in ./games/
-* includes 3 external autosolvers:  iplr3r, ibox3r, hbox5
+* includes 3 external autosolvers:  iplr3r, ibox3r, hbox
 * includes 3 embedded autosolvers that help you to learn.
 * no installation
 * no dependencies
@@ -103,21 +108,21 @@ other keys:
 To start the game type:
 
 on linux:
-	rufasok_gnu
+	forsok
 
 on osx:
-	rufasok_osx
+	forsok_osx
 
 on windows:
-	rufasok64.bat
+	wforsok.bat
 
 ----------------------------------------------
 ## Embedded Autosolver Function
 Three autosolvers are now embedded within this application so that pressing the (=)-key or (,)-key or (.)-key at any time initiates an attempt to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These three embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
 
-The 3rd alternate solver [hbox5] is initiated with the (.)-key. It is the most capable embedded solver.
+The 3rd alternate solver [hbox] is initiated with the (.)-key. It is the most capable embedded solver.
 
-Note: all 3 solvers can fail if the puzzle is too large (256 or more valid puzzle positions).
+Note: all 3 solvers can fail if the puzzle is too large or difficult.
 
 Thus, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the solver and proceed manually.  This really helps when you cannot see what your next move should be.
 
@@ -129,21 +134,26 @@ Embedded autosolver failure might imply the present state of the puzzle is impos
 The default **timeout** used by embedded solvers is 10 seconds, but is adjustable using the (+)-key or (-)-key on the number keypad to increment or decrement by 10 seconds per press. This is the time to wait for the internal autosolvers before giving up.
 
 
-Also, the default **method** used by embedded solver Hbox5 [ (.)-key ] can now be set using the k-key, where k is 0..5.
+Also, the default **method** used by embedded solver Hbox [ (.)-key ] can now be set using the k-key, where k is 0..5.
 
 
-### 6 method options for hbox5:
+### 10 method options for hbox:
 
-	* 0 "quickest" [initial default]
-	* 1 more "efficient"
-	* 2 suppress hungarian estimator (eg. for dense puzzles)
-	* 3 like 0 but tries to reduce total moves
-	* 4 like 1 but tries to reduce total moves
-	* 5 like 2 but tries to reduce total moves
+* 0 "quickest" using 6 heuristics+inertia
+* 1 "move-efficient" +inertia
+* 2 suppress hungarian estimator (for dense puzzles)
+* 3 like 0 but single-step
+* 4 like 0 but using only 5-heuristics
+* 5 like 0 but using 1-heuristic (meth10)
+* 6 like 1 but using 1-heuristic (meth11)
+* 7 like 2 but using 1-heuristic (meth12)
+* 8 like 3 but using 1-heuristic (meth13)
+* 9 like 4 but using 1-heuristic (meth14)
+
 
 For further details see:
 
-	* https://sourceforge.net/projects/hbox4/    (4 is not a typo)
+	* https://sourceforge.net/projects/hbox4/
 
 
 
@@ -162,7 +172,7 @@ EG on Linux type
 	external_solvers/ibox3r_gnu games/pico_22.sok 3
 
 EG on OSX type
-	external_solvers/hbox5_osx games/pico_22.sok 3
+	external_solvers/hbox_osx games/pico_22.sok 3
 
 ----------------------------------------------
 
@@ -203,26 +213,26 @@ Users may then open a terminal window, cd to install-directory, then, at the com
 
 In Linux type: 
 
-	rufasok_gnu
+	forsok
 
 
 You can also use the Windows executable under wine, thusly:
-	* wine cmd < rufasok64.bat
-	* wine binw64/rufasok.exe
+	* wine cmd < wforsok.bat
+	* wine binw64/forsok.exe
 
 ----------------------------------------------------------------------
 Windows users type:  
 
-	rufasok64.bat 
+	wforsok.bat 
 
 or:
 
-	binw64\rufasok.exe
+	binw64\forsok.exe
  
 ----------------------------------------------------------------------
 Mac users type:
 
-	rufasok_osx
+	forsok_osx
 
 ----------------------------------------------------------------------
 
@@ -257,14 +267,25 @@ The (h) key brings up a help menu that looks like this:
 * (z)   = define setPoint...subsequent presses of (r)-key will restore THIS configuration
 * (c)   = next skin Color
 * (=)   = try autosolver #1 (iplr3r)
-* (.)   = try autosolver #2 (hbox5...most capable)
+* (.)   = try autosolver #2 (hbox...most capable)
 * (,)   = try autosolver #3 (ibox3r)
 * box-click: possible destinations [not perfect]
 * goal-click: possible sources [not perfect either]
-
 * use mouse drag to change size of puzzle window
-
 * (f)   = toggle: grab/keep windows focus (default=off)
+* (0..9) set solution method for hbox, where :
+	* 0 "quickest" using 6 heuristics+inertia
+	* 1 "move-efficient" +inertia
+	* 2 suppress hungarian estimator (for dense puzzles)
+	* 3 like 0 but single-step
+	* 4 like 0 but using only 5-heuristics
+	* 5 like 0 but using 1-heuristic (meth10)
+	* 6 like 1 but using 1-heuristic (meth11)
+	* 7 like 2 but using 1-heuristic (meth12)
+	* 8 like 3 but using 1-heuristic (meth13)
+	* 9 like 4 but using 1-heuristic (meth14)
+
+
 
 -----------------------------------------------------------------
 
@@ -287,7 +308,7 @@ These are old solvers that have significant limitations,
 including rapid growth of memory usage, puzzles that are 
 too large or have too many boxes to handle. 
 They seem to still exit gracefully, and when they do, 
-simply use "hbox5" using the period-key. On the other
+simply use "hbox" using the period-key. On the other
 hand, the "puller" will generally give the most efficient 
 solutions, when it does work.
 
@@ -313,6 +334,31 @@ to tackle level 2 from the original_50 sokoban file.  In this single-file mode, 
 
 
 
+## Addendum for the Reverse-Sokoban game
+
+I included a new "beta-test" Puller-Sokoban app that may still have some bugs:
+
+* wbaksok.bat (MsWin)
+* baksok (linux)
+* baksok_osx (Mac/OSX)
+
+Most keys work as before, but to PULL a box next to the puller 
+press the Left-Ctrl-Key while using the arrow-keys.
+You can also use the numeric-keypad-arrows  U=kp8, L=kp4, R=kp6, D=kp2
+to PULL the boxes (which are no longer pushable). 
+
+There is only one autosolver, and it is invoked with the "="-key.
+
+To solve the backward problem, you MUST end up with the puller on the
+puller-goal-cell, indicated by a magenta color. It is not enough to
+just get all the boxes on their goals.
+
+In the reversed problem, there is uncertainty about the starting puller position.
+So, before you begin, you can cycle thru all of the candidates using the "e"-key.
+But note that some candidates may be unsolvable, so choose wisely. 
+OTOH, if the autosolver is capable of solving the problem, it will automatically 
+move the puller to a valid start position, at which time you can try solving it 
+yourself, or continue to use the autosolver.
 
 
 
@@ -332,8 +378,8 @@ In the ~/buildScripts/ directory try:
 
 **msWin64** => setpath64.bat + w64buildall.bat
 
-Of course, the above scripts need to be adjusted
-to reference your actual compiler installation directory.
+**Of course, the above scripts need to be adjusted
+to reference your actual compiler installation directory.**
 Please read carefully: ~/docs/gnuAdaOnWindows.txt.
 
 -------------------------------------------------------
@@ -358,17 +404,17 @@ The commands to build the external autosolvers:
 on Linux:
 	cccgnu.sh ibox3r
 	cccgnu.sh iplr3r
-	cccgnu.sh hbox5
+	cccgnu.sh hbox
 
 and on Windows:
 	ccc64.bat ibox3r
 	ccc64.bat iplr3r
-	ccc64.bat hbox5
+	ccc64.bat hbox
 
 and on OSX:
 	cccosx.bat ibox3r
 	cccosx.bat iplr3r
-	cccosx.bat hbox5
+	cccosx.bat hbox
 
 
 
@@ -418,6 +464,11 @@ It is my intention to use media with copyrights or licenses that are compatible 
 -------------------------------------------------
 
 ## Revision History:
+
+**ver 2.6.1 -- 01jan2025**
+* Fixed embedded solver hbox method 3; made other improvements.
+* Added "+", "-" number-keypad keys to adjust timeout.
+* Improved other two embedded solvers; and fixed memory leak.
 
 **ver 2.6.0 -- 16dec2024**
 * Updated hbox4 to hbox5.
@@ -496,4 +547,3 @@ It is my intention to use media with copyrights or licenses that are compatible 
 * Improved compile scripts;
 * Improved key bindings;
 
-](https://sourceforge.net/projects/rufassok/files/latest/download)
