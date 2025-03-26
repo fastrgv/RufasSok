@@ -90,6 +90,10 @@ other keys:
 *	(o) restart from beginning
 *	(esc) quit
 
+* (pgUp) = bigger
+* (pdDn) = smaller
+
+
 --------------------------------------------
 ## Features
 
@@ -257,6 +261,8 @@ rufasok has the following skin options:
 The (h) key brings up a help menu that looks like this:
 
 * (esc) = exit
+* (pgUp) = bigger
+* (pdDn) = smaller
 * (u)   = undo last move
 * (r)   = reset to setpoint
 * (o)   = restart Original puzzle
