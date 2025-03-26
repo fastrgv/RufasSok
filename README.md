@@ -5,7 +5,7 @@ RufasSok is a minimalistic version of the Sokoban puzzle game with embedded auto
 
 Get full source and binaries in the tar.gz file under releases, or try this link:
 
-https://github.com/fastrgv/RufasSok/releases/download/v2.6.3/sok25mar25.7z
+https://github.com/fastrgv/RufasSok/releases/download/v2.6.3/sok26mar25.7z
 
 Type "7z x filename" to extract the archive.
 
@@ -81,10 +81,10 @@ other keys:
 *	(+) increase wait timeout (numKeypad)
 *	(-) decrease wait timeout (numKeypad)
 *	(u) undo
-*	(n) next level current set
-*	(p) previous level current set
-*	(Lshift) previous set
-*	(Rshift) next set
+*	(n) next level current file
+*	(p) previous level current file
+*	(Lctrl)+(p) previous file
+*  	(Lctrl)+(n) next file
 *	(z) set a setpoint
 *	(r) reset to z-key setpoint
 *	(o) restart from beginning
@@ -262,8 +262,8 @@ The (h) key brings up a help menu that looks like this:
 * (o)   = restart Original puzzle
 * (n)   = next-puzzle in current file
 * (p)   = previous-puzzle in current file
-* (R-shift) = next-file
-* (L-shift) = previous-file
+* (L-ctrl)+(n) = next-file
+* (L-ctrl)+(p) = previous-file
 * (z)   = define setPoint...subsequent presses of (r)-key will restore THIS configuration
 * (c)   = next skin Color
 * (=)   = try autosolver #1 (iplr3r)
