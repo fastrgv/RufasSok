@@ -39,6 +39,12 @@ https://sourceforge.net/projects/rufassok/files/latest/download
 ## What's new:
 
 
+**ver 2.6.4 -- 29mar2025**
+
+* Repaired window resizing issues. Use mouse to resize.
+* Enhanced simplicity & consistency of key-mappings.
+
+
 **ver 2.6.3 -- 25mar2025**
 
 * Added a REVERSE Sokoban game using a Puller & single autosolver: hbox.
@@ -81,18 +87,17 @@ other keys:
 *	(+) increase wait timeout (numKeypad)
 *	(-) decrease wait timeout (numKeypad)
 *	(u) undo
+
 *	(n) next level current file
 *	(p) previous level current file
-*	(Lctrl)+(p) previous file
-*  	(Lctrl)+(n) next file
+*  (ctrl)+(n) next file
+*  (ctrl)+(p) previous file
+
 *	(z) set a setpoint
-*	(r) reset to z-key setpoint
-*	(o) restart from beginning
+*	(r) reset to z-key setpoint (restart is no setpoint)
+*	(ctrl)+(r) restart from beginning
+
 *	(esc) quit
-
-* (pgUp) = bigger
-* (pdDn) = smaller
-
 
 --------------------------------------------
 ## Features
@@ -109,6 +114,7 @@ other keys:
 * simply unzip in your Downloads directory, and run;
 * or unzip onto a USB flash drive [w/same file format] and run.
 
+[namechanges due to new backward (puller) game]
 To start the game type:
 
 on linux:
@@ -143,8 +149,8 @@ Also, the default **method** used by embedded solver Hbox [ (.)-key ] can now be
 
 ### 10 method options for hbox:
 
-* 0 "quickest" using 6 heuristics+inertia
-* 1 "move-efficient" +inertia
+* 0 "pull-efficient"
+* 1 "move-efficient"
 * 2 suppress hungarian estimator (for dense puzzles)
 * 3 like 0 but single-step
 * 4 like 0 but using only 5-heuristics
@@ -261,24 +267,20 @@ rufasok has the following skin options:
 The (h) key brings up a help menu that looks like this:
 
 * (esc) = exit
-* (pgUp) = bigger
-* (pdDn) = smaller
 * (u)   = undo last move
-* (r)   = reset to setpoint
-* (o)   = restart Original puzzle
 * (n)   = next-puzzle in current file
 * (p)   = previous-puzzle in current file
-* (L-ctrl)+(n) = next-file
-* (L-ctrl)+(p) = previous-file
+* (ctrl)+(n) = next-file
+* (ctrl)+(p) = previous-file
 * (z)   = define setPoint...subsequent presses of (r)-key will restore THIS configuration
+* (r)   = reset to setpoint
+* (ctrl)+(r)   = restart Original puzzle
 * (c)   = next skin Color
 * (=)   = try autosolver #1 (iplr3r)
 * (.)   = try autosolver #2 (hbox...most capable)
 * (,)   = try autosolver #3 (ibox3r)
-* box-click: possible destinations [not perfect]
-* goal-click: possible sources [not perfect either]
+-------------------------------------------------------
 * use mouse drag to change size of puzzle window
-* (f)   = toggle: grab/keep windows focus (default=off)
 * (0..9) set solution method for hbox, where :
 	* 0 "quickest" using 6 heuristics+inertia
 	* 1 "move-efficient" +inertia
@@ -300,11 +302,6 @@ Linux Note:  a "mouse" or "sloppy" window focus policy might allow
 	new window no longer includes the pointer).  In this case,
 	simply move the cursor back onto the puzzle window.  This
 	annoyance does NOT occur with a systemwide "click" policy.
-
-	Now the f-key toggles a game policy that forcibly keeps
-	focus, although it is generally considered improper
-	window-handling. So, remember to toggle it off if it
-	misbehaves.
 
 
 -----------------------------------------------------------------
@@ -349,22 +346,23 @@ I included a new "beta-test" Puller-Sokoban app that may still have some bugs:
 * baksok_osx (Mac/OSX)
 
 Most keys work as before, but to PULL a box next to the puller 
-press the Left-Ctrl-Key while using the arrow-keys.
+press the Ctrl-Key while using the arrow-keys or WASD.
 You can also use the numeric-keypad-arrows  U=kp8, L=kp4, R=kp6, D=kp2
 to PULL the boxes (which are no longer pushable). 
 
-There is only one autosolver, and it is invoked with the "="-key.
+There is only one autosolver, and it is invoked with the (=)-key.
 
 To solve the backward problem, you MUST end up with the puller on the
 puller-goal-cell, indicated by a magenta color. It is not enough to
 just get all the boxes on their goals.
 
-In the reversed problem, there is uncertainty about the starting puller position.
-So, before you begin, you can cycle thru all of the candidates using the "e"-key.
+In the reversed problem, there is uncertainty about the Initial puller position.
+So, before you begin, you can cycle thru all of the candidates using the "i"-key.
 But note that some candidates may be unsolvable, so choose wisely. 
 OTOH, if the autosolver is capable of solving the problem, it will automatically 
 move the puller to a valid start position, at which time you can try solving it 
-yourself, or continue to use the autosolver.
+yourself, or continue to use the autosolver and step towards the solution
+with each (=)-key press.
 
 
 
@@ -390,11 +388,11 @@ Please read carefully: ~/docs/gnuAdaOnWindows.txt.
 
 -------------------------------------------------------
 
-The distributed linux executable requires glibc v2.14 or newer.  That means if your distribution is older than june 2011, it probably will not run, and you will need to recompile.
+If your linux distribution is old, it might not run, and you will need to recompile.
 
 Note that linux users with wine installed can run with the command:
 
-	wine binw64/rufasok.exe
+	wine binw64/forsok.exe
 
 
 If the delivered GNU/Linux binary does not run, try:
