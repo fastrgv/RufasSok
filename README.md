@@ -29,31 +29,27 @@ https://sourceforge.net/projects/rufassok/files/latest/download
 
 
 
+
+
 # RufaSok ...
 	Minimalist Sokoban Game 
 	using OpenGL, GLFW3 & OpenAL audio
-	with embedded live solvers
+	with embedded live solvers & **backward mode**
 
 -------------------------------------------------------------
 
 ## What's new:
 
 
-**ver 2.6.4 -- 29mar2025**
+**ver 2.6.5 -- 26aug2025**
 
-* Repaired window resizing issues. Use mouse to resize.
-* Enhanced simplicity & consistency of key-mappings.
+* Improved sizing in single file mode.
+* Equal-key now always mapped to [most able] hbox solver.
+* Updated hbox solver.
+* Added 2 other, less-capable, solvers to baksok, the backward mode game.
+* Fixed disappearing puller problem [baksok] when solver fails.
+* Corrected baksok win message to read "pulls" not "pushes".
 
-
-**ver 2.6.3 -- 25mar2025**
-
-* Added a REVERSE Sokoban game using a Puller & single autosolver: hbox.
-* Added 3 heuristic monitors in pusher version: #corrals, #blocked-rooms, #blocked-boxes.
-
-
-**ver 2.6.2 -- 3mar2025**
-
-* Updated & improved 3 sok-solvers.
 
 See complete revision history at end of file.
 
@@ -66,6 +62,8 @@ See complete revision history at end of file.
 This is a minimalistic version of an interactive, OpenGL Sokoban puzzle game with 3 external solvers, and 3 embedded auto-solvers designed to help you to learn to solve puzzles on your own.
 
 The objective is to push all the movable objects onto their targets.  And the embedded solvers can help you a little, or a lot, when you get stuck.
+
+And now, when you think you are ready for it, try solving the various puzzles backward using the new backward mode game called "baksok".
 
 ### Controls
 
@@ -337,9 +335,9 @@ to tackle level 2 from the original_50 sokoban file.  In this single-file mode, 
 
 
 
-## Addendum for the Reverse-Sokoban game
+## Addendum for the new Reverse-Sokoban game
 
-I included a new "beta-test" Puller-Sokoban app that may still have some bugs:
+I included a new Puller-Sokoban app:
 
 * wbaksok.bat (MsWin)
 * baksok (linux)
@@ -350,7 +348,16 @@ press the Ctrl-Key while using the arrow-keys or WASD.
 You can also use the numeric-keypad-arrows  U=kp8, L=kp4, R=kp6, D=kp2
 to PULL the boxes (which are no longer pushable). 
 
-There is only one autosolver, and it is invoked with the (=)-key.
+Hbox, the most capable autosolver, is invoked with the (=)-key.
+Now, the other 2, less-capable solvers have also been added.
+The (,)-key invokes ibox3r, while the (.)-key invokes iplr3r. These
+last two have not been adequately tested yet, but preliminary
+tests seemed Ok. Just as in the forward game, forsok, these solvers
+can be invoked and abandoned at any time to help you find the next
+good move. And just as before, they might fail to find a solution
+within the time constraints. This often means that you made a move
+that renders the problem unsolvable. If so, you can undo your recent
+moves with the (u)-key until it IS solvable.
 
 To solve the backward problem, you MUST end up with the puller on the
 puller-goal-cell, indicated by a magenta color. It is not enough to
@@ -416,9 +423,9 @@ and on Windows:
 	ccc64.bat hbox
 
 and on OSX:
-	cccosx.bat ibox3r
-	cccosx.bat iplr3r
-	cccosx.bat hbox
+	cccosx.sh ibox3r
+	cccosx.sh iplr3r
+	cccosx.sh hbox
 
 
 
@@ -468,6 +475,17 @@ It is my intention to use media with copyrights or licenses that are compatible 
 -------------------------------------------------
 
 ## Revision History:
+
+**ver 2.6.4 -- 29mar2025**
+* Repaired window resizing issues. Use mouse to resize.
+* Enhanced simplicity & consistency of key-mappings.
+
+**ver 2.6.3 -- 25mar2025**
+* Added a REVERSE Sokoban game using a Puller & single autosolver: hbox.
+* Added 3 heuristic monitors in pusher version: #corrals, #blocked-rooms, #blocked-boxes.
+
+**ver 2.6.2 -- 3mar2025**
+* Updated & improved 3 sok-solvers.
 
 **ver 2.6.1 -- 01jan2025**
 * Fixed embedded solver hbox method 3; made other improvements.
