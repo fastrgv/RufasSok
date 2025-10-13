@@ -19,15 +19,8 @@ Type "7z x filename" to extract the archive.
 
 
 
-
-
-
-
-
 alternate download link:
 https://sourceforge.net/projects/rufassok/files/latest/download
-
-
 
 
 
@@ -40,6 +33,11 @@ https://sourceforge.net/projects/rufassok/files/latest/download
 
 ## What's new:
 
+
+**ver 2.6.6 -- 13oct2025**
+
+* Updated help screen & README.md.
+* Updated hbox solver.
 
 **ver 2.6.5 -- 26aug2025**
 
@@ -59,18 +57,18 @@ See complete revision history at end of file.
 
 ## RufaSok Introduction
 
-This is a minimalistic version of an interactive, OpenGL Sokoban puzzle game with 3 external solvers, and 3 embedded auto-solvers designed to help you to learn to solve puzzles on your own.
+This is a minimalistic version of an interactive, OpenGL Sokoban puzzle game platform with 3 external solvers, and 3 embedded auto-solvers designed to help you to learn to solve puzzles on your own. It includes a reverse game option where the boxes must be pulled back from their goals to their original positions.
 
-The objective is to push all the movable objects onto their targets.  And the embedded solvers can help you a little, or a lot, when you get stuck.
+The forward platform is called "forsok". Its objective is to push all the movable boxes onto their goals.  And the embedded solvers can help you a little, or a lot, when you get stuck.
 
-And now, when you think you are ready for it, try solving the various puzzles backward using the new backward mode game called "baksok".
+And now, when you think you are ready for it, try solving the various puzzles backward using the new backward mode platform called "baksok".
 
 ### Controls
 
 solver keys [within parentheses]:
 
-*	(.) hbox [most capable]; 
-*	(=) bfs#1 [iplr; for small puzzles]; 
+*	(=) hbox [most capable]; 
+*	(.) bfs#1 [iplr; for small or dense puzzles]; 
 *	(,) bfs#2 [ibox; medium]
 
 *  (0..9) sets hbox method [see details below]
@@ -92,7 +90,7 @@ other keys:
 *  (ctrl)+(p) previous file
 
 *	(z) set a setpoint
-*	(r) reset to z-key setpoint (restart is no setpoint)
+*	(r) reset to z-key setpoint (restarts if no setpoint)
 *	(ctrl)+(r) restart from beginning
 
 *	(esc) quit
@@ -128,9 +126,7 @@ on windows:
 ## Embedded Autosolver Function
 Three autosolvers are now embedded within this application so that pressing the (=)-key or (,)-key or (.)-key at any time initiates an attempt to solve the present state of the current puzzle within a limited amount of time.  If successful then you will see an onscreen prompt to continue to press the same key to single-step toward the solution.  Otherwise you will see no such prompt.  These three embedded solvers are good for small and dense layouts;  but not so good at large, sparse puzzles.
 
-The 3rd alternate solver [hbox] is initiated with the (.)-key. It is the most capable embedded solver.
-
-Note: all 3 solvers can fail if the puzzle is too large or difficult.
+The 3rd alternate solver [hbox] is initiated with the (=)-key. It is the most capable embedded solver.
 
 Thus, you can give yourself a headstart toward a correct solution by limited use of this feature.  Once you think you can solve it yourself, stop using the solver and proceed manually.  This really helps when you cannot see what your next move should be.
 
@@ -138,25 +134,26 @@ Note also that the solvers can tell you when you have gone too far and gotten yo
 
 Embedded autosolver failure might imply the present state of the puzzle is impossible to solve, or simply that the autosolver failed due to time constraint, or insufficient capability.
 
+Note: all 3 solvers can fail if the puzzle is too large or difficult. However, be aware thatafter making a few good moves yourself, the autosolvers might then be capable of finding a solution. An extreme example is Xsokoban puzzle #19 of 90. After making a single [correct] move, hbox can solve it in 72 seconds using method 0, yet hbox cannot solve it from the beginning!
 
 The default **timeout** used by embedded solvers is 10 seconds, but is adjustable using the (+)-key or (-)-key on the number keypad to increment or decrement by 10 seconds per press. This is the time to wait for the internal autosolvers before giving up.
-
 
 Also, the default **method** used by embedded solver Hbox [ (.)-key ] can now be set using the k-key, where k is 0..5.
 
 
 ### 10 method options for hbox:
 
-* 0 "pull-efficient"
-* 1 "move-efficient"
+* 0 "pull-efficient" with 6 heuristics, +inertia
+* 1 "move-efficient" with 6 heuristics, +inertia
 * 2 suppress hungarian estimator (for dense puzzles)
-* 3 like 0 but single-step
-* 4 like 0 but using only 5-heuristics
-* 5 like 0 but using 1-heuristic (meth10)
-* 6 like 1 but using 1-heuristic (meth11)
-* 7 like 2 but using 1-heuristic (meth12)
-* 8 like 3 but using 1-heuristic (meth13)
-* 9 like 4 but using 1-heuristic (meth14)
+* 3 like 1 but single-step (no inertia)
+* 4 like 0 but using only 4-heuristics, single-step
+* 5 like 0 but using only 5-heuristics, single-step
+* 6 like 0 but single-step (no inertia)
+
+* 7 baseline method 0, using only 2-heuristic (meth10) 1-step
+* 8 baseline method 1, using only 2-heuristic (meth11) 1-step
+* 9 baseline method 2, using only 1-heuristic (meth12) 1-step
 
 
 For further details see:
@@ -343,7 +340,7 @@ I included a new Puller-Sokoban app:
 * baksok (linux)
 * baksok_osx (Mac/OSX)
 
-Most keys work as before, but to PULL a box next to the puller 
+Most keys work as before, but to PULL a box next to the puller,
 press the Ctrl-Key while using the arrow-keys or WASD.
 You can also use the numeric-keypad-arrows  U=kp8, L=kp4, R=kp6, D=kp2
 to PULL the boxes (which are no longer pushable). 
@@ -355,7 +352,7 @@ last two have not been adequately tested yet, but preliminary
 tests seemed Ok. Just as in the forward game, forsok, these solvers
 can be invoked and abandoned at any time to help you find the next
 good move. And just as before, they might fail to find a solution
-within the time constraints. This often means that you made a move
+within the time constraints. This often means that you made a bad move
 that renders the problem unsolvable. If so, you can undo your recent
 moves with the (u)-key until it IS solvable.
 
@@ -366,10 +363,10 @@ just get all the boxes on their goals.
 In the reversed problem, there is uncertainty about the Initial puller position.
 So, before you begin, you can cycle thru all of the candidates using the "i"-key.
 But note that some candidates may be unsolvable, so choose wisely. 
-OTOH, if the autosolver is capable of solving the problem, it will automatically 
-move the puller to a valid start position, at which time you can try solving it 
-yourself, or continue to use the autosolver and step towards the solution
-with each (=)-key press.
+OTOH, if the autosolver is capable of solving the problem, when invoked, it will 
+automatically move the puller to a valid start position, at which time you can 
+try solving it yourself, or continue to use the autosolver and step towards the 
+solution with each (=)-key press.
 
 
 
