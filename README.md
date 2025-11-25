@@ -25,28 +25,24 @@ https://sourceforge.net/projects/rufassok/files/latest/download
 
 
 # RufaSok ...
-	Minimalist Sokoban Game 
-	using OpenGL, GLFW3 & OpenAL audio
-	with embedded live solvers & **backward mode**
+   Minimalist Sokoban Game 
+   using OpenGL, GLFW3 & OpenAL audio
+   with embedded live solvers & **backward mode**
 
 -------------------------------------------------------------
 
 ## What's new:
 
 
-**ver 2.6.6 -- 13oct2025**
+**ver 2.6.7 -- 26nov2025**
 
-* Updated help screen & README.md.
-* Updated hbox solver.
-
-**ver 2.6.5 -- 26aug2025**
-
-* Improved sizing in single file mode.
-* Equal-key now always mapped to [most able] hbox solver.
-* Updated hbox solver.
-* Added 2 other, less-capable, solvers to baksok, the backward mode game.
-* Fixed disappearing puller problem [baksok] when solver fails.
-* Corrected baksok win message to read "pulls" not "pushes".
+* Added a countdown during long hbox autosolver waits.
+* Added more information to help screens.
+* Added b-key display of box-invalid locations.
+* Improved user friendliness by skipping problematic levels rather than aborting.
+* Increased the puzzle size capacity to 128 boxes and 64 rows & cols.
+* In single-file mode there is a new and valuable capability to read an external solution file that will enable a single-step playback.
+* Corrected status counters.
 
 
 See complete revision history at end of file.
@@ -67,33 +63,38 @@ And now, when you think you are ready for it, try solving the various puzzles ba
 
 solver keys [within parentheses]:
 
-*	(=) hbox [most capable]; 
-*	(.) bfs#1 [iplr; for small or dense puzzles]; 
-*	(,) bfs#2 [ibox; medium]
+*  (=) hbox [most capable]; 
+*  (.) bfs#1 [iplr; for small or dense puzzles]; 
+*  (,) bfs#2 [ibox; medium]
 
 *  (0..9) sets hbox method [see details below]
 
-movement keys:	
+movement keys: 
 
-*	w    a    s    d
-*	(up) (lf) (dn) (rt)
+*   i    j    k    l
+*   w    a    s    d
+*  (up) (lf) (dn) (rt)
 
 other keys:
 
-*	(+) increase wait timeout (numKeypad)
-*	(-) decrease wait timeout (numKeypad)
-*	(u) undo
+*  (+) increase wait timeout (numKeypad)
+*  (-) decrease wait timeout (numKeypad)
+*  (u) undo
 
-*	(n) next level current file
-*	(p) previous level current file
+*  (n) next level current file
+*  (p) previous level current file
+
+*  (shift)+(n) skip ahead 10 levels in current file
+*  (shift)+(p) skip back 10 levels in current file
+
 *  (ctrl)+(n) next file
 *  (ctrl)+(p) previous file
 
-*	(z) set a setpoint
-*	(r) reset to z-key setpoint (restarts if no setpoint)
-*	(ctrl)+(r) restart from beginning
+*  (z) set a setpoint
+*  (r) reset to z-key setpoint (restarts if no setpoint)
+*  (ctrl)+(r) restart from beginning
 
-*	(esc) quit
+*  (esc) quit
 
 --------------------------------------------
 ## Features
@@ -114,13 +115,13 @@ other keys:
 To start the game type:
 
 on linux:
-	forsok
+   forsok
 
 on osx:
-	forsok_osx
+   forsok_osx
 
 on windows:
-	wforsok.bat
+   wforsok.bat
 
 ----------------------------------------------
 ## Embedded Autosolver Function
@@ -158,26 +159,27 @@ Also, the default **method** used by embedded solver Hbox [ (.)-key ] can now be
 
 For further details see:
 
-	* https://sourceforge.net/projects/hbox4/
+* ~/docs/hbox.md
+* https://sourceforge.net/projects/hbox4/
 
 
 
 
 
-## External Autosolvers
+## Included External Autosolvers
 Remember that there are still three external autosolvers without time constraints.  Subject to several limitations, typing: "solver-name puzzle-file-name.sok maxlevels level-number" will attempt to solve a particular puzzle for you, where solver-name is either "iplr3r" or "ibox3r".  There are many large or sparse [lishout] puzzles the first two solvers cannot handle, but they are pretty good at sovling the small dense ones.  Use the script ccc.sh to compile either solver for your operating system (assuming the presence of an Ada compiler).
 
 To run type:  [exeName puzzleFile LevelToSolve]
 
 EG on windows type:
-	external_solvers\iplr3r.exe games\pico_22.sok 3
-	...to solve the 3rd level in file pico_22.sok.
+   external_solvers\iplr3r.exe games\pico_22.sok 3
+   ...to solve the 3rd level in file pico_22.sok.
 
 EG on Linux type
-	external_solvers/ibox3r_gnu games/pico_22.sok 3
+   external_solvers/ibox3r_gnu games/pico_22.sok 3
 
 EG on OSX type
-	external_solvers/hbox_osx games/pico_22.sok 3
+   external_solvers/hbox_osx games/pico_22.sok 3
 
 ----------------------------------------------
 
@@ -190,7 +192,7 @@ Focusing on portability, transparency, and open source freedom, this project rel
 The linux-build can run on multiple Linux distros!
 The Windows build can run on Win10 + Win11.
 
-I am short of testers, and would appreciate any feedback...
+I am short of testers ;) and would appreciate any feedback...
 Open source Ada developers are welcome to help improve or extend this app.
 Developer or not, send comments, suggestions or questions to:
 fastrgv@gmail.com
@@ -208,7 +210,7 @@ Unzip the archive.
 * On Linux & Windows, 7z [www.7-zip.org] works well for this. The proper command to extract the archive and maintain the directory structure is "7z x filename".
 
 * On OSX, Keka works well for 7Z files. The command-line for Keka is:
-	* /Applications/Keka.app/Contents/MacOS/Keka --cli 7z x (filename.7z)
+   * /Applications/Keka.app/Contents/MacOS/Keka --cli 7z x (filename.7z)
 
 After the archive is unzipped...
 
@@ -218,26 +220,26 @@ Users may then open a terminal window, cd to install-directory, then, at the com
 
 In Linux type: 
 
-	forsok
+   forsok
 
 
 You can also use the Windows executable under wine, thusly:
-	* wine cmd < wforsok.bat
-	* wine binw64/forsok.exe
+   * wine cmd < wforsok.bat
+   * wine binw64/forsok.exe
 
 ----------------------------------------------------------------------
 Windows users type:  
 
-	wforsok.bat 
+   wforsok.bat 
 
 or:
 
-	binw64\forsok.exe
+   binw64\forsok.exe
  
 ----------------------------------------------------------------------
 Mac users type:
 
-	forsok_osx
+   forsok_osx
 
 ----------------------------------------------------------------------
 
@@ -277,38 +279,38 @@ The (h) key brings up a help menu that looks like this:
 -------------------------------------------------------
 * use mouse drag to change size of puzzle window
 * (0..9) set solution method for hbox, where :
-	* 0 "quickest" using 6 heuristics+inertia
-	* 1 "move-efficient" +inertia
-	* 2 suppress hungarian estimator (for dense puzzles)
-	* 3 like 0 but single-step
-	* 4 like 0 but using only 5-heuristics
-	* 5 like 0 but using 1-heuristic (meth10)
-	* 6 like 1 but using 1-heuristic (meth11)
-	* 7 like 2 but using 1-heuristic (meth12)
-	* 8 like 3 but using 1-heuristic (meth13)
-	* 9 like 4 but using 1-heuristic (meth14)
+   * 0 "quickest" using 6 heuristics+inertia
+   * 1 "move-efficient" +inertia
+   * 2 suppress hungarian estimator (for dense puzzles)
+   * 3 like 0 but single-step
+   * 4 like 0 but using only 5-heuristics
+   * 5 like 0 but using 1-heuristic (meth10)
+   * 6 like 1 but using 1-heuristic (meth11)
+   * 7 like 2 but using 1-heuristic (meth12)
+   * 8 like 3 but using 1-heuristic (meth13)
+   * 9 like 4 but using 1-heuristic (meth14)
 
 
 
 -----------------------------------------------------------------
 
 Linux Note:  a "mouse" or "sloppy" window focus policy might allow
-	window focus to slip away while changing puzzles (if the
-	new window no longer includes the pointer).  In this case,
-	simply move the cursor back onto the puzzle window.  This
-	annoyance does NOT occur with a systemwide "click" policy.
+   window focus to slip away while changing puzzles (if the
+   new window no longer includes the pointer).  In this case,
+   simply move the cursor back onto the puzzle window.  This
+   annoyance does NOT occur with a systemwide "click" policy.
 
 
 -----------------------------------------------------------------
 
-### Problems with "puller" or "ibox" embedded solvers
+### Problems with "iplr3r" or "ibox3r" embedded solvers
 These are old solvers that have significant limitations,
-including rapid growth of memory usage, puzzles that are 
+including rapid growth of memory usage, for puzzles that are 
 too large or have too many boxes to handle. 
 They seem to still exit gracefully, and when they do, 
 simply use "hbox" using the period-key. On the other
-hand, the "puller" will generally give the most efficient 
-solutions, when it does work.
+hand, "iplr3r" will generally give the most efficient 
+solutions, when it does work. So it's usually worth trying first.
 
 
 -----------------------------------------------------------------
@@ -316,19 +318,44 @@ solutions, when it does work.
 
 Note that the file naming conventions must be maintained now that dynamic file loading is done after reading the ./games/ directory.  No underscores are permitted except one that precedes the integer that indicates the number of levels in the file.  The name format is thus anyname_nnn.sok.  Note that there is a standardized format for the online sokoban files themselves that I have attempted to respect and maintain.
 
-Note also that a specific sokoban file may be tested by naming it on the terminal window command line with the following syntax:
 
-	rufasok sokfilepath maxlevels startlevel
+## Single File Mode
 
-where rufasok can be 
+A specific sokoban file may be loaded by naming it on the terminal window command line with the following syntax:
 
-	rufasok_gnu, rufasok_osx, or rufasok64.bat
+   forsok sokfilepath maxlevels startlevel
 
-For example on linux you could type
 
-	"rufasok_gnu games/original_50.sok 50 2"
+For example you could type
+
+   "forsok_osx games/original_50.sok 50 2"  (on Mac/OSX)
+
+   "forsok games/original_50.sok 50 2"  (on linux)
+
+   "wforsok.bat games/original_50.sok 50 2"  (on Windows)
 
 to tackle level 2 from the original_50 sokoban file.  In this single-file mode, you can still use the next-level(n) & previous-level(p) keys, however, the next/previous files (R-shift/L-shift) keys are disabled.
+
+
+## Single File Playback Mode (new as of 20nov25)
+
+If you happen to have an externally generated solution string in a file, along with the puzzle file, (possibly in the same file) then you can load both to single step through the solution using the following commandline syntax:
+
+   forsok puzzleFile maxlevels startlevel solutionFile
+
+For example:
+
+   "forsok_osx games/original_50.sok 50 2 sol2"  (on Mac/OSX)
+
+   "forsok games/original_50.sok 50 2 sol2"  (on linux)
+
+   "wforsok.bat games/original_50.sok 50 2 sol2"  (on Windows)
+
+where "sol2" is the name of the solution file [that contains only ONE solution]. It must contain the word "Solution" on the line immediately preceeding the standard solution string.
+
+This new mode is experimental and not user friendly, but I needed it myself to see how to begin solving a difficult puzzle (sasquatch7 #40). So I solved it using "Festival", then watched the playback. By the way, my copies of Takaken74 & Sokolution could not solve this puzzle in 30 minutes!
+
+
 
 
 
@@ -343,7 +370,7 @@ I included a new Puller-Sokoban app:
 Most keys work as before, but to PULL a box next to the puller,
 press the Ctrl-Key while using the arrow-keys or WASD.
 You can also use the numeric-keypad-arrows  U=kp8, L=kp4, R=kp6, D=kp2
-to PULL the boxes (which are no longer pushable). 
+to PULL the boxes (reminder: boxes are no longer pushable). 
 
 Hbox, the most capable autosolver, is invoked with the (=)-key.
 Now, the other 2, less-capable solvers have also been added.
@@ -369,6 +396,8 @@ try solving it yourself, or continue to use the autosolver and step towards the
 solution with each (=)-key press.
 
 
+## Limitations
+These apps can handle up to a maximum of 128 boxes, 64 rows/cols, and 256 box-valid interior cells.
 
 
 
@@ -396,7 +425,7 @@ If your linux distribution is old, it might not run, and you will need to recomp
 
 Note that linux users with wine installed can run with the command:
 
-	wine binw64/forsok.exe
+   wine binw64/forsok.exe
 
 
 If the delivered GNU/Linux binary does not run, try:
@@ -410,19 +439,19 @@ If the delivered GNU/Linux binary does not run, try:
 The commands to build the external autosolvers:
 
 on Linux:
-	cccgnu.sh ibox3r
-	cccgnu.sh iplr3r
-	cccgnu.sh hbox
+   cccgnu.sh ibox3r
+   cccgnu.sh iplr3r
+   cccgnu.sh hbox
 
 and on Windows:
-	ccc64.bat ibox3r
-	ccc64.bat iplr3r
-	ccc64.bat hbox
+   ccc64.bat ibox3r
+   ccc64.bat iplr3r
+   ccc64.bat hbox
 
 and on OSX:
-	cccosx.sh ibox3r
-	cccosx.sh iplr3r
-	cccosx.sh hbox
+   cccosx.sh ibox3r
+   cccosx.sh iplr3r
+   cccosx.sh hbox
 
 
 
@@ -472,6 +501,19 @@ It is my intention to use media with copyrights or licenses that are compatible 
 -------------------------------------------------
 
 ## Revision History:
+
+
+**ver 2.6.6 -- 13oct2025**
+* Updated help screen & README.md.
+* Updated hbox solver.
+
+**ver 2.6.5 -- 26aug2025**
+* Improved sizing in single file mode.
+* Equal-key now always mapped to [most able] hbox solver.
+* Updated hbox solver.
+* Added 2 other, less-capable, solvers to baksok, the backward mode game.
+* Fixed disappearing puller problem [baksok] when solver fails.
+* Corrected baksok win message to read "pulls" not "pushes".
 
 **ver 2.6.4 -- 29mar2025**
 * Repaired window resizing issues. Use mouse to resize.
@@ -537,16 +579,14 @@ It is my intention to use media with copyrights or licenses that are compatible 
 **ver 2.5.2 -- 4mar2021**
 * Added 3rd embedded solver accessed by (,)-key.
 
-
 **ver 2.5.1 -- 20feb2021**
 * Fixed annoying changes of user-set window size/position.
 * Upgraded to OpenAL sound.
 * Updated autosolvers.
 * Added more capable hbox4 autosolver.
 * Added visual aid that shows 
-	* possible destinations when a box is clicked.
-	* possible sources when a goal is clicked.
-
+   * possible destinations when a box is clicked.
+   * possible sources when a goal is clicked.
 
 **ver 2.5.0 -- 3nov20**
 * Greatly simplified build process.
@@ -558,8 +598,6 @@ It is my intention to use media with copyrights or licenses that are compatible 
 * Added on-screen message when setpoint is saved.
 * Added "rufasok64.bat" for Windows users.
 * Made direct ALSA sound the default build for linux.
-
-
 
 **ver 2.4.0 -- 04jan20**
 * Converted to GLFW3;
