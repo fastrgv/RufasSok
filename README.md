@@ -34,6 +34,14 @@ https://sourceforge.net/projects/rufassok/files/latest/download
 ## What's new:
 
 
+**ver 2.6.8 -- 15dec2025**
+
+* Revised baksok so that the x-key file dump works as input to resume later.
+* Added ability to highlight safe-haven cells to assist manual solutions.
+* Updated hbox solver.
+* Added a utility screen to choose a solution method for hbox.
+
+
 **ver 2.6.7 -- 26nov2025**
 
 * Added a countdown during long hbox autosolver waits.
@@ -63,11 +71,11 @@ And now, when you think you are ready for it, try solving the various puzzles ba
 
 solver keys [within parentheses]:
 
-*  (=) hbox [most capable]; 
-*  (.) bfs#1 [iplr; for small or dense puzzles]; 
-*  (,) bfs#2 [ibox; medium]
+*  (.) iplr; for small or dense puzzles
+*  (,) ibox; medium
+*  (=) hbox [most capable]
 
-*  (0..9) sets hbox method [see details below]
+*  (m) sets hbox method [see details below]
 
 movement keys: 
 
@@ -75,7 +83,10 @@ movement keys:
 *   w    a    s    d
 *  (up) (lf) (dn) (rt)
 
-other keys:
+For baksok use (ctrl)-key with a movement key to "PULL" a box.
+
+
+other common key functions:
 
 *  (+) increase wait timeout (numKeypad)
 *  (-) decrease wait timeout (numKeypad)
@@ -93,6 +104,8 @@ other keys:
 *  (z) set a setpoint
 *  (r) reset to z-key setpoint (restarts if no setpoint)
 *  (ctrl)+(r) restart from beginning
+
+*  (x) dump current puzzle state to a file that can be input later
 
 *  (esc) quit
 
@@ -135,33 +148,23 @@ Note also that the solvers can tell you when you have gone too far and gotten yo
 
 Embedded autosolver failure might imply the present state of the puzzle is impossible to solve, or simply that the autosolver failed due to time constraint, or insufficient capability.
 
-Note: all 3 solvers can fail if the puzzle is too large or difficult. However, be aware thatafter making a few good moves yourself, the autosolvers might then be capable of finding a solution. An extreme example is Xsokoban puzzle #19 of 90. After making a single [correct] move, hbox can solve it in 72 seconds using method 0, yet hbox cannot solve it from the beginning!
+Note: all 3 solvers can fail if the puzzle is too large or difficult. However, be aware thatafter making a few good moves yourself, the autosolvers might then be capable of finding a solution. An extreme example is Xsokoban puzzle #19 of 90. After making a single [correct] move, hbox can solve it in 60 seconds using method 23, yet hbox cannot solve it from the beginning!
 
 The default **timeout** used by embedded solvers is 10 seconds, but is adjustable using the (+)-key or (-)-key on the number keypad to increment or decrement by 10 seconds per press. This is the time to wait for the internal autosolvers before giving up.
 
-Also, the default **method** used by embedded solver Hbox [ (.)-key ] can now be set using the k-key, where k is 0..5.
+Also, the **method** used by embedded solver Hbox is now set using the m-key...
 
 
-### 10 method options for hbox:
 
-* 0 "pull-efficient" with 6 heuristics, +inertia
-* 1 "move-efficient" with 6 heuristics, +inertia
-* 2 suppress hungarian estimator (for dense puzzles)
-* 3 like 1 but single-step (no inertia)
-* 4 like 0 but using only 4-heuristics, single-step
-* 5 like 0 but using only 5-heuristics, single-step
-* 6 like 0 but single-step (no inertia)
+### Method options for hbox:
+There are several hbox solution methods to choose from including 5 basic methods, 
+each of which has several variations, because hbox is currently being used 
+as a research tool.
+See ~/docs/solmethods.txt for choices available within this RufasSok app.
+See ~/docs/SolMethodsIndex.txt for an exhaustive listing.
 
-* 7 baseline method 0, using only 2-heuristic (meth10) 1-step
-* 8 baseline method 1, using only 2-heuristic (meth11) 1-step
-* 9 baseline method 2, using only 1-heuristic (meth12) 1-step
-
-
-For further details see:
-
-* ~/docs/hbox.md
-* https://sourceforge.net/projects/hbox4/
-
+Even more information can be found by studying the documents in:
+https://sourceforge.net/projects/hbox4/files/latest/download
 
 
 
@@ -192,7 +195,7 @@ Focusing on portability, transparency, and open source freedom, this project rel
 The linux-build can run on multiple Linux distros!
 The Windows build can run on Win10 + Win11.
 
-I am short of testers ;) and would appreciate any feedback...
+I have 0 testers ;) and would appreciate any feedback...
 Open source Ada developers are welcome to help improve or extend this app.
 Developer or not, send comments, suggestions or questions to:
 fastrgv@gmail.com
@@ -261,36 +264,33 @@ rufasok has the following skin options:
 
 ### Other Details
 
-The (h) key brings up a help menu that looks like this:
+The (m) key brings up a menu to select a solution Method for the hbox solver.
 
-* (esc) = exit
-* (u)   = undo last move
-* (n)   = next-puzzle in current file
-* (p)   = previous-puzzle in current file
-* (ctrl)+(n) = next-file
-* (ctrl)+(p) = previous-file
-* (z)   = define setPoint...subsequent presses of (r)-key will restore THIS configuration
-* (r)   = reset to setpoint
-* (ctrl)+(r)   = restart Original puzzle
-* (c)   = next skin Color
-* (=)   = try autosolver #1 (iplr3r)
-* (.)   = try autosolver #2 (hbox...most capable)
-* (,)   = try autosolver #3 (ibox3r)
+The (h) key brings up a help menu that looks something like this:
+
+ Movement: ijkl, wasd, or arrowKeys(up,lf,dn,rt)
+ (esc) quit     (u) undo
+ (m)  set hbox method
+ (r) restore-setpt  (ctrl)+(r) restart
+ (n) next-level this set
+ (p) previous-level this set
+ (ctrl)+(p) = previous puzzle set
+ (ctrl)+(n) = next puzzle set
+ (z)  redefine setPoint Zero
+ (q)  Quiet move sound
+ (c)  next skin Color
+ (kp+), (kp-)  +timeout, -timeout
+
+ (.)   solver: (iplr)
+ (,)   solver: (ibox)
+ (=)   solver: (hbox)
+
+ (b)     show Box-invalid cells
+ (spc) show freeSpace cells
+ (x) dump puzzle to Pdump.sok
+
 -------------------------------------------------------
 * use mouse drag to change size of puzzle window
-* (0..9) set solution method for hbox, where :
-   * 0 "quickest" using 6 heuristics+inertia
-   * 1 "move-efficient" +inertia
-   * 2 suppress hungarian estimator (for dense puzzles)
-   * 3 like 0 but single-step
-   * 4 like 0 but using only 5-heuristics
-   * 5 like 0 but using 1-heuristic (meth10)
-   * 6 like 1 but using 1-heuristic (meth11)
-   * 7 like 2 but using 1-heuristic (meth12)
-   * 8 like 3 but using 1-heuristic (meth13)
-   * 9 like 4 but using 1-heuristic (meth14)
-
-
 
 -----------------------------------------------------------------
 
@@ -308,7 +308,7 @@ These are old solvers that have significant limitations,
 including rapid growth of memory usage, for puzzles that are 
 too large or have too many boxes to handle. 
 They seem to still exit gracefully, and when they do, 
-simply use "hbox" using the period-key. On the other
+simply use "hbox" using the equal-key. On the other
 hand, "iplr3r" will generally give the most efficient 
 solutions, when it does work. So it's usually worth trying first.
 
@@ -336,6 +336,12 @@ For example you could type
 
 to tackle level 2 from the original_50 sokoban file.  In this single-file mode, you can still use the next-level(n) & previous-level(p) keys, however, the next/previous files (R-shift/L-shift) keys are disabled.
 
+A prior puzzle dump may also be read in and play resumed thusly:
+
+	"forsok Pdump.sok 1 1"  (forsok in linux)
+	"baksok Rdump.sok 1 1"  (baksok in linux)
+
+
 
 ## Single File Playback Mode (new as of 20nov25)
 
@@ -351,7 +357,7 @@ For example:
 
    "wforsok.bat games/original_50.sok 50 2 sol2"  (on Windows)
 
-where "sol2" is the name of the solution file [that contains only ONE solution]. It must contain the word "Solution" on the line immediately preceeding the standard solution string.
+where "sol2" is the name of the solution file [that contains only ONE solution]. **It must contain the word "Solution" on the line immediately preceeding the standard solution string.**
 
 This new mode is experimental and not user friendly, but I needed it myself to see how to begin solving a difficult puzzle (sasquatch7 #40). So I solved it using "Festival", then watched the playback. By the way, my copies of Takaken74 & Sokolution could not solve this puzzle in 30 minutes!
 
