@@ -504,6 +504,18 @@ It is my intention to use media with copyrights or licenses that are compatible 
 ### SoundFiles (applause,fanfare,whoosh)
 ...are from freesound.org and are covered by the Creative Commons CC0 license documented in the accompanying file creativeCommonsCC0.txt.
 
+
+### Boxoban Puzzle Set Citation:
+
+@misc{boxobanlevels,
+author = {Arthur Guez and Mehdi Mirza and Karol Gregor and Rishabh Kabra and Sebastien Racaniere and Theophane Weber and David Raposo and Adam Santoro and Laurent Orseau and Tom Eccles and Greg Wayne and David Silver and Timothy Lillicrap and Victor Valdes},
+title = {An investigation of Model-free planning: boxoban levels},
+howpublished= {https://github.com/deepmind/boxoban-levels/},
+year = "2018"
+}
+
+
+
 -------------------------------------------------
 
 ## Revision History:
