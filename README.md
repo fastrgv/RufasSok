@@ -19,19 +19,25 @@ Type "7z x filename" to extract the archive.
 
 
 
-alternate download link:
+Permalink:
 https://sourceforge.net/projects/rufassok/files/latest/download
 
 
+# RufaSok
 
-# RufaSok ...
-   Minimalist Sokoban Game 
-   using OpenGL, GLFW3 & OpenAL audio
-   with embedded live solvers & **backward mode**
+		Minimalist Sokoban Puzzle Platform
+		using OpenGL, GLFW3 & OpenAL audio
+		with embedded live solvers & backward mode
 
 -------------------------------------------------------------
 
 ## What's new:
+
+
+**ver 2.6.9 -- 02feb2026**
+
+* Eliminated need to install MSVC-redistributables on Windows 10, 11.
+* Corrected move & push counts after undo-move, or restore-setpoint
 
 
 **ver 2.6.8 -- 15dec2025**
@@ -42,26 +48,13 @@ https://sourceforge.net/projects/rufassok/files/latest/download
 * Added a utility screen to choose a solution method for hbox.
 
 
-**ver 2.6.7 -- 26nov2025**
-
-* Added a countdown during long hbox autosolver waits.
-* Added more information to help screens.
-* Added b-key display of box-invalid locations.
-* Improved user friendliness by skipping problematic levels rather than aborting.
-* Increased the puzzle size capacity to 128 boxes and 64 rows & cols.
-* In single-file mode there is a new and valuable capability to read an external solution file that will enable a single-step playback.
-* Corrected status counters.
-
-
 See complete revision history at end of file.
-
-
 
 -----------------------------------------------------------------
 
 ## RufaSok Introduction
 
-This is a minimalistic version of an interactive, OpenGL Sokoban puzzle game platform with 3 external solvers, and 3 embedded auto-solvers designed to help you to learn to solve puzzles on your own. It includes a reverse game option where the boxes must be pulled back from their goals to their original positions.
+This is a minimalistic version of an interactive, OpenGL Sokoban puzzle game platform with 3 embedded solvers designed to help you to learn to solve puzzles on your own. It includes a reverse game option where the boxes must be pulled back from their goals to their original positions.
 
 The forward platform is called "forsok". Its objective is to push all the movable boxes onto their goals.  And the embedded solvers can help you a little, or a lot, when you get stuck.
 
@@ -69,13 +62,13 @@ And now, when you think you are ready for it, try solving the various puzzles ba
 
 ### Controls
 
-solver keys [within parentheses]:
+solver keys (within parentheses):
 
-*  (.) iplr; for small or dense puzzles
-*  (,) ibox; medium
-*  (=) hbox [most capable]
+*  **(.)** iplr; for small or dense puzzles
+*  **(,)** ibox; medium
+*  **(=)** hbox [most capable]
 
-*  (m) sets hbox method [see details below]
+*  **(m)** sets hbox method [see details below]
 
 movement keys: 
 
@@ -88,26 +81,26 @@ For baksok use (ctrl)-key with a movement key to "PULL" a box.
 
 other common key functions:
 
-*  (+) increase wait timeout (numKeypad)
-*  (-) decrease wait timeout (numKeypad)
-*  (u) undo
+*  **(+)** increase wait timeout (numKeypad)
+*  **(-)** decrease wait timeout (numKeypad)
+*  **(u)** undo
 
-*  (n) next level current file
-*  (p) previous level current file
+*  **(n)** next level current file
+*  **(p)** previous level current file
 
-*  (shift)+(n) skip ahead 10 levels in current file
-*  (shift)+(p) skip back 10 levels in current file
+*  **(shift)+(n)** skip ahead 10 levels in current file
+*  **(shift)+(p)** skip back 10 levels in current file
 
-*  (ctrl)+(n) next file
-*  (ctrl)+(p) previous file
+*  **(ctrl)+(n)** next file
+*  **(ctrl)+(p)** previous file
 
-*  (z) set a setpoint
-*  (r) reset to z-key setpoint (restarts if no setpoint)
-*  (ctrl)+(r) restart from beginning
+*  **(z)** set a setpoint
+*  **(r)** reset to z-key setpoint (restarts if no setpoint)
+*  **(ctrl)+(r)** restart from beginning
 
-*  (x) dump current puzzle state to a file that can be input later
+*  **(x)** dump current puzzle state to a file that can be input later
 
-*  (esc) quit
+*  **(esc)** quit
 
 --------------------------------------------
 ## Features
@@ -128,13 +121,16 @@ other common key functions:
 To start the game type:
 
 on linux:
-   forsok
+
+* forsok
 
 on osx:
-   forsok_osx
+
+* forsok_osx
 
 on windows:
-   wforsok.bat
+
+* wforsok.bat
 
 ----------------------------------------------
 ## Embedded Autosolver Function
@@ -157,11 +153,11 @@ Also, the **method** used by embedded solver Hbox is now set using the m-key...
 
 
 ### Method options for hbox:
-There are several hbox solution methods to choose from including 5 basic methods, 
+There are many hbox solution methods to choose from including 5 basic methods,
 each of which has several variations, because hbox is currently being used 
 as a research tool.
 See ~/docs/solmethods.txt for choices available within this RufasSok app.
-See ~/docs/SolMethodsIndex.txt for an exhaustive listing.
+See ~/docs/SolMethodIndex.txt for an exhaustive listing.
 
 Even more information can be found by studying the documents in:
 https://sourceforge.net/projects/hbox4/files/latest/download
@@ -188,7 +184,7 @@ EG on OSX type
 
 ## what is special about this project?
 
-It uses the Ada programming language and modern OpenGL methods, with textures, shaders and uniforms.  Compiles and runs on Windows, OSX, GNU/Linux systems.
+It uses the Ada programming language and modern OpenGL methods, with textures, shaders and uniforms.  Compiles and runs on Windows, OSX, Linux systems.
 
 Focusing on portability, transparency, and open source freedom, this project relies exclusively on F.O.S.S. tools:  a thin GLFW3 binding, a thin OpenGL binding, a PNG reader by Stephen Sanguine & Dimitry Anisimkov, and a GNAT compiler.
 
@@ -223,7 +219,7 @@ Users may then open a terminal window, cd to install-directory, then, at the com
 
 In Linux type: 
 
-   forsok
+* forsok
 
 
 You can also use the Windows executable under wine, thusly:
@@ -233,16 +229,16 @@ You can also use the Windows executable under wine, thusly:
 ----------------------------------------------------------------------
 Windows users type:  
 
-   wforsok.bat 
+* wforsok.bat 
 
 or:
 
-   binw64\forsok.exe
+* binw64\forsok.exe
  
 ----------------------------------------------------------------------
 Mac users type:
 
-   forsok_osx
+* forsok_osx
 
 ----------------------------------------------------------------------
 
@@ -250,14 +246,16 @@ Mac users type:
 
 The install-directory should contain subdirectories named "data", "libs", "games", "skins", "src", "buildScripts", "binw64", "docs".
 
-Pusher movement is accomplished using the arrow keys or the WASD keys.
+Pusher movement is accomplished using the arrow keys or the WASD/IJKL keys.
 
 rufasok has the following skin options:
+
 * gray bkgd
 * star bkgd
 * water bkgd
 * antique desk skin
 * plain and simple
+
 ...the (c)-key now cycles thru the skins (c=color)
 
 -----------------------------------------------------------------
@@ -268,37 +266,79 @@ The (m) key brings up a menu to select a solution Method for the hbox solver.
 
 The (h) key brings up a help menu that looks something like this:
 
- Movement: ijkl, wasd, or arrowKeys(up,lf,dn,rt)
- (esc) quit     (u) undo
- (m)  set hbox method
- (r) restore-setpt  (ctrl)+(r) restart
- (n) next-level this set
- (p) previous-level this set
- (ctrl)+(p) = previous puzzle set
- (ctrl)+(n) = next puzzle set
- (z)  redefine setPoint Zero
- (q)  Quiet move sound
- (c)  next skin Color
- (kp+), (kp-)  +timeout, -timeout
+* Movement: ijkl, wasd, or arrowKeys(up,lf,dn,rt)
+* (esc) quit-------(u) undo
+* (m)  set hbox method
+* (r) restore-setpt-------(ctrl)+(r) restart
+* (n) next-level this set
+* (p) previous-level this set
+* (ctrl)+(p)  previous puzzle set
+* (ctrl)+(n)  next puzzle set
+* (z)  redefine setPoint Zero
+* (q)  Quiet move sound
+* (c)  next skin Color
+* (kp+), (kp-)  +timeout, -timeout
 
- (.)   solver: (iplr)
- (,)   solver: (ibox)
- (=)   solver: (hbox)
+* (.)   solver: (iplr)
+* (,)   solver: (ibox)
+* (=)   solver: (hbox)
 
- (b)     show Box-invalid cells
- (spc) show freeSpace cells
- (x) dump puzzle to Pdump.sok
+* (b)     show Box-invalid cells
+* (spc) show freeSpace cells
+* (x) dump puzzle to Pdump.sok
 
 -------------------------------------------------------
 * use mouse drag to change size of puzzle window
 
+
+### Method Options for Hbox
+The (m) key brings up a menu like this:
+
+	0 => inertial pushOpt fwdP5
+		10 => baseline
+		20 => revP5
+		30 => newP5
+		40 => baseline+newP5
+	1 => inertial moveOpt fwdP5
+		11 => baseline
+		21 => revp5
+		31 => newp5
+		41 => baseline+newP5
+	3 => 1step moveOpt fwdP5
+		13 => baseline
+		23 => revP5
+		33 => newP5
+		43 => baseline+newP5
+	6 => 1step pushopt fwdP5
+		16 => baseline
+		26 => revp5
+		36 => newP5
+		46 => baseline+newP5
+	2 => 1step NonHungarian
+		12 => baseline
+		32 => newP5
+		42 => baseline+newP5
+
+where selecting ...
+
+* the first line sets method=0,
+* the second sets method=10,
+* the last line sets method=42, etc.
+
+Read ~/docs/SolMethodIndex.txt for a brief explanation of the
+method numbering. 
+
+In general, method 1 is a good hbox-default, but for dense puzzles where boxes & goals are interspersed, use method 2 or 42.
+For small and dense puzzles use iplr3r or ibox3r for more efficient solutions [these are BFS solvers].
+
 -----------------------------------------------------------------
 
-Linux Note:  a "mouse" or "sloppy" window focus policy might allow
-   window focus to slip away while changing puzzles (if the
-   new window no longer includes the pointer).  In this case,
-   simply move the cursor back onto the puzzle window.  This
-   annoyance does NOT occur with a systemwide "click" policy.
+### Linux Note:  
+a "mouse" or "sloppy" window focus policy might allow
+window focus to slip away while changing puzzles (if the
+new window no longer includes the pointer).  In this case,
+simply move the cursor back onto the puzzle window.  This
+annoyance does NOT occur with a systemwide "click" policy.
 
 
 -----------------------------------------------------------------
@@ -323,23 +363,23 @@ Note that the file naming conventions must be maintained now that dynamic file l
 
 A specific sokoban file may be loaded by naming it on the terminal window command line with the following syntax:
 
-   forsok sokfilepath maxlevels startlevel
+* forsok sokfilepath maxlevels startlevel
 
 
 For example you could type
 
-   "forsok_osx games/original_50.sok 50 2"  (on Mac/OSX)
+* forsok_osx games/original_50.sok 50 2"  (on Mac/OSX)
 
-   "forsok games/original_50.sok 50 2"  (on linux)
+* forsok games/original_50.sok 50 2"  (on linux)
 
-   "wforsok.bat games/original_50.sok 50 2"  (on Windows)
+* wforsok.bat games/original_50.sok 50 2"  (on Windows)
 
 to tackle level 2 from the original_50 sokoban file.  In this single-file mode, you can still use the next-level(n) & previous-level(p) keys, however, the next/previous files (R-shift/L-shift) keys are disabled.
 
 A prior puzzle dump may also be read in and play resumed thusly:
 
-	"forsok Pdump.sok 1 1"  (forsok in linux)
-	"baksok Rdump.sok 1 1"  (baksok in linux)
+* forsok Pdump.sok 1 1  (forsok in linux)
+* baksok Rdump.sok 1 1  (baksok in linux)
 
 
 
@@ -347,19 +387,17 @@ A prior puzzle dump may also be read in and play resumed thusly:
 
 If you happen to have an externally generated solution string in a file, along with the puzzle file, (possibly in the same file) then you can load both to single step through the solution using the following commandline syntax:
 
-   forsok puzzleFile maxlevels startlevel solutionFile
+* forsok puzzleFile maxlevels startlevel solutionFile
 
 For example:
 
-   "forsok_osx games/original_50.sok 50 2 sol2"  (on Mac/OSX)
-
-   "forsok games/original_50.sok 50 2 sol2"  (on linux)
-
-   "wforsok.bat games/original_50.sok 50 2 sol2"  (on Windows)
+* forsok_osx games/original_50.sok 50 2 sol2  (on Mac/OSX)
+* forsok games/original_50.sok 50 2 sol2  (on linux)
+* wforsok.bat games/original_50.sok 50 2 sol2  (on Windows)
 
 where "sol2" is the name of the solution file [that contains only ONE solution]. **It must contain the word "Solution" on the line immediately preceeding the standard solution string.**
 
-This new mode is experimental and not user friendly, but I needed it myself to see how to begin solving a difficult puzzle (sasquatch7 #40). So I solved it using "Festival", then watched the playback. By the way, my copies of Takaken74 & Sokolution could not solve this puzzle in 30 minutes!
+This new mode is experimental and not user friendly, but I needed it myself to see how to begin solving a difficult puzzle (sasquatch7 #40). So I solved it using "Festival", then watched the playback. By the way, my copy of Takaken74 could not solve this puzzle in 30 minutes; sokolution732: 88sec. (running on linux under wine).
 
 
 
@@ -415,11 +453,11 @@ These apps can handle up to a maximum of 128 boxes, 64 rows/cols, and 256 box-va
 
 In the ~/buildScripts/ directory try:
 
-**Mac/OSX** => obuildall.sh
+* **Mac/OSX** => obuildall.sh
 
-**Linux** => lbuildall.sh
+* **Linux** => lbuildall.sh
 
-**msWin64** => setpath64.bat + w64buildall.bat
+* **msWin64** => setpath64.bat + w64buildall.bat
 
 **Of course, the above scripts need to be adjusted
 to reference your actual compiler installation directory.**
@@ -434,7 +472,7 @@ Note that linux users with wine installed can run with the command:
    wine binw64/forsok.exe
 
 
-If the delivered GNU/Linux binary does not run, try:
+If the delivered Linux binary does not run, try:
 
 * Use wine and the Windows EXE, as above; or
 
@@ -445,19 +483,22 @@ If the delivered GNU/Linux binary does not run, try:
 The commands to build the external autosolvers:
 
 on Linux:
-   cccgnu.sh ibox3r
-   cccgnu.sh iplr3r
-   cccgnu.sh hbox
+
+*   cccgnu.sh ibox3r
+*   cccgnu.sh iplr3r
+*   cccgnu.sh hbox
 
 and on Windows:
-   ccc64.bat ibox3r
-   ccc64.bat iplr3r
-   ccc64.bat hbox
+
+*   ccc64.bat ibox3r
+*   ccc64.bat iplr3r
+*   ccc64.bat hbox
 
 and on OSX:
-   cccosx.sh ibox3r
-   cccosx.sh iplr3r
-   cccosx.sh hbox
+
+*   cccosx.sh ibox3r
+*   cccosx.sh iplr3r
+*   cccosx.sh hbox
 
 
 
@@ -468,7 +509,7 @@ and on OSX:
 This app is covered by the GNU GPL v3 as indicated in the sources:
 
 
- Copyright (C) 2025  <fastrgv@gmail.com>
+ Copyright (C) 2026  <fastrgv@gmail.com>
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -505,7 +546,12 @@ It is my intention to use media with copyrights or licenses that are compatible 
 ...are from freesound.org and are covered by the Creative Commons CC0 license documented in the accompanying file creativeCommonsCC0.txt.
 
 
-### Boxoban Puzzle Set Citation:
+### Boxoban Puzzle Set
+
+Boxoban is a newly added A.I. generated puzzle set.
+Using only 4 boxes, this set is trivial for even a simple BFS solver, yet can be tricky for a human solver!
+
+#### Boxoban Citation:
 
 @misc{boxobanlevels,
 author = {Arthur Guez and Mehdi Mirza and Karol Gregor and Rishabh Kabra and Sebastien Racaniere and Theophane Weber and David Raposo and Adam Santoro and Laurent Orseau and Tom Eccles and Greg Wayne and David Silver and Timothy Lillicrap and Victor Valdes},
@@ -520,6 +566,14 @@ year = "2018"
 
 ## Revision History:
 
+**ver 2.6.7 -- 26nov2025**
+* Added a countdown during long hbox autosolver waits.
+* Added more information to help screens.
+* Added b-key display of box-invalid locations.
+* Improved user friendliness by skipping problematic levels rather than aborting.
+* Increased the puzzle size capacity to 128 boxes and 64 rows & cols.
+* In single-file mode there is a new and valuable capability to read an external solution file that will enable a single-step playback.
+* Corrected status counters.
 
 **ver 2.6.6 -- 13oct2025**
 * Updated help screen & README.md.
