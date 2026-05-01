@@ -34,6 +34,12 @@ https://sourceforge.net/projects/rufassok/files/latest/download
 ## What's new:
 
 
+**ver 2.6.10 -- 02may2026**
+
+* Fixed the backward-mode autosolvers. If a solver is invoked AFTER a manual move then the solver is no longer allowed to reposition the puller.
+* Added screen output of filename, level.
+
+
 **ver 2.6.9 -- 02feb2026**
 
 * Eliminated need to install MSVC-redistributables on Windows 10, 11.
@@ -58,7 +64,7 @@ This is a minimalistic version of an interactive, OpenGL Sokoban puzzle game pla
 
 The forward platform is called "forsok". Its objective is to push all the movable boxes onto their goals.  And the embedded solvers can help you a little, or a lot, when you get stuck.
 
-And now, when you think you are ready for it, try solving the various puzzles backward using the new backward mode platform called "baksok".
+And now, when you think you are ready for it, try solving the various puzzles backward using the new backward mode platform called "baksok"...including fully functional embedded, backward-mode autosolvers.
 
 ### Controls
 
@@ -403,9 +409,9 @@ This new mode is experimental and not user friendly, but I needed it myself to s
 
 
 
-## Addendum for the new Reverse-Sokoban game
+## The Reverse-Sokoban game
 
-I included a new Puller-Sokoban app:
+A Puller-Sokoban app is included:
 
 * wbaksok.bat (MsWin)
 * baksok (linux)
@@ -414,30 +420,42 @@ I included a new Puller-Sokoban app:
 Most keys work as before, but to PULL a box next to the puller,
 press the Ctrl-Key while using the arrow-keys or WASD.
 You can also use the numeric-keypad-arrows  U=kp8, L=kp4, R=kp6, D=kp2
-to PULL the boxes (reminder: boxes are no longer pushable). 
+to PULL the boxes (reminder: boxes are no longer pushable).
 
-Hbox, the most capable autosolver, is invoked with the (=)-key.
-Now, the other 2, less-capable solvers have also been added.
-The (,)-key invokes ibox3r, while the (.)-key invokes iplr3r. These
-last two have not been adequately tested yet, but preliminary
-tests seemed Ok. Just as in the forward game, forsok, these solvers
+RufasSok is probably the only sokoban platform to offer fully
+functional embedded autosolvers that work on reverse-sokoban!
+
+Hbox, the most capable embedded autosolver, is invoked with the (=)-key.
+Two other, less-capable solvers have also been enabled.
+The (,)-key invokes ibox3r, while the (.)-key invokes iplr3r.  
+Just as in the forward game platform, forsok, these solvers
 can be invoked and abandoned at any time to help you find the next
 good move. And just as before, they might fail to find a solution
 within the time constraints. This often means that you made a bad move
-that renders the problem unsolvable. If so, you can undo your recent
-moves with the (u)-key until it IS solvable.
+that renders the current configuration unsolvable. If so, you can undo 
+your recent moves with the (u)-key until it IS solvable. This allows
+you an incredible opportunity to see exactly where you went wrong!
 
 To solve the backward problem, you MUST end up with the puller on the
 puller-goal-cell, indicated by a magenta color. It is not enough to
 just get all the boxes on their goals.
 
-In the reversed problem, there is uncertainty about the Initial puller position.
-So, before you begin, you can cycle thru all of the candidates using the "i"-key.
-But note that some candidates may be unsolvable, so choose wisely. 
-OTOH, if the autosolver is capable of solving the problem, when invoked, it will 
-automatically move the puller to a valid start position, at which time you can 
-try solving it yourself, or continue to use the autosolver and step towards the 
-solution with each (=)-key press.
+For the initial configuration of a reverse sokoban puzzle, there is 
+uncertainty about the initial puller position. So, before you begin 
+a manual solution, you can cycle thru all of the candidates using 
+the "o"-key. But note that many candidates may be unsolvable, 
+so choose wisely. 
+
+OTOH, if the autosolver is capable of solving the problem, then
+when invoked, it will automatically move the puller to a solvable start 
+position, at which time you can immediately abandon the autosolver 
+and try solving it yourself, or continue to use it and step towards 
+the solution with each (=)-key press.
+
+If the autosolvers are invoked on a non-initial configuration, there is
+no ambiguity so the solvers preserve the puller position.
+
+
 
 
 ## Limitations
